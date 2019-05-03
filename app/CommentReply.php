@@ -21,4 +21,8 @@ class CommentReply extends Model
     {
         return $this->belongsTo(TeacherProfile::class);
     }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

@@ -59,6 +59,7 @@ class HomeSinglCoursController extends Controller
         ));
     }
 
+
     public function addQuestion(Request $request)
     {
         $question = new Question();
@@ -85,6 +86,9 @@ class HomeSinglCoursController extends Controller
             // $comment->created_at = Course::dateComment($comment->created_at);
             $comment->user; 
             $comment->commentReplies; 
+            foreach ($comment->commentReplies as $commentReplie) {
+                $commentReplie->user;
+            }
         }
 
         return Response()->json(['etat' => true, 'data' => $comments]);

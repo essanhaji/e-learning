@@ -334,6 +334,33 @@
 
                                         </div><!-- /.comment-detail -->
                                     </article><!-- /.comment -->
+
+                                    <ul class="comment-list">
+
+
+                                    <li v-for="commentReplie in comment.comment_replies">
+                                    <article class="comment style1 style1">
+                                        <div class="text-right">
+                                            <a type="button" data-toggle="modal" data-target="#exampleModaAddReplay"><i class="fa fa-trash-o"></i></a>
+                                            <a type="button" data-toggle="modal" data-target="#exampleModaAddReplay"><i class="fa fa-edit"></i></a>
+                                        </div>
+                                        <div class="comment-avatar thmub">
+                                            <img style="border-radius: 90px;" :src="'{{ asset('storage/') }}/' + commentReplie.user.avatar" width="90px" :alt="commentReplie.user.name">
+                                        </div>
+                                        <div class="comment-detail">
+                                            <div class="comment-meta">
+                                                <p class="comment-author"><a>@{{ commentReplie.user.name }}</a></p>
+                                                <p class="comment-date">@{{ commentReplie.created_at }} &nbsp;<span class="badge badge-warning">@{{ commentReplie.type }}</span></p>
+                                            </div>
+                                            <p class="comment-body">@{{ commentReplie.comment }}</p>
+                                            
+                                            <a type="button" data-toggle="modal" data-target="#exampleModaAddReplay" class="comment-reply">Reply</a>
+
+                                        </div>
+                                    </article>
+
+
+                                    </ul>
                                 </li>
 
                                 <!-- Modal -->
