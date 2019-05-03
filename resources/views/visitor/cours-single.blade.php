@@ -403,13 +403,14 @@
                             <div id="respond" class="comment-respond">
                                 <h4 class="title comment-title style1">Leave a comment</h4>
                                 <p>Your email address will not be published. Required fields are marked *</p>
-                                <form class="flat-contact-form" id="contactform6" method="post" action="http://themesflat.com/html/educate/contact/contact-process.php">
 
-                                    <input type="text" value="" tabindex="1" placeholder="Name*" name="name" id="name" required="" style="">
+                                <form class="flat-contact-form" id="contactform6" method="post">
 
-                                    <input type="email" value="" tabindex="2" placeholder="Email" name="email" id="email-contact1" required="">
+                                    <input type="text" tabindex="1" placeholder="Name*" name="name" id="name">
 
-                                    <textarea class="type-input" tabindex="3" placeholder="Comment*" name="message" id="message-contact1" required=""></textarea>
+                                    <input type="email" tabindex="2" placeholder="Email" name="email" id="email-contact1" >
+
+                                    <textarea class="type-input" tabindex="3" placeholder="Comment*" name="message" id="message-contact1" ></textarea>
 
                                     <button class="flat-button bg-orange">Post Comment</button>
 
@@ -517,6 +518,21 @@
 @section('js')
 <script>
     window.Laravel.course_id = '{{ $cours->id }}';
+    @guest
+        @php
+            $cours->teacher->user->role;
+        @endphp
+        window.Laravel.user.role = {!!json_encode($cours->teacher->user) !!};
+    @else
+        @auth
+            @php
+                // refresh les relation
+                Auth::user()->role;
+            @endphp
+            window.Laravel.user = {!!json_encode( Auth::user()) !!};
+            //console.log("==========>"+ window.Laravel.user.name);
+        @endauth
+    @endguest
 </script>
 
 <script type="text/javascript" src="{{ asset('js/vue/coursSingleQuestion.js') }}"></script>

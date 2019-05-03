@@ -11,6 +11,9 @@
 |
 */
 
+Route::get('home', 'HomeController@index')->middleware('auth');
+
+
 //----------------------------------->>>>>> Student
 ///////////////////////////////////////////////////
 Route::get('/student', 'HomeController@indexStudent');
@@ -68,4 +71,5 @@ Route::get('blog/{slug}', 'HomeSinglePoseController@index');
 
 #.... blog all posts
 Route::get('blog/{category?}/{slug?}', 'HomeBlogController@index');
+
 

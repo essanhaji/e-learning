@@ -368,6 +368,7 @@
             'csrfToken' => csrf_token(),
             'url'       => url('/'),
             'course_id' => '',
+            'user' => '',
         ]) !!}
     </script>
 

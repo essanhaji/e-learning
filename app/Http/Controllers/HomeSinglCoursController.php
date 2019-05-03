@@ -90,7 +90,9 @@ class HomeSinglCoursController extends Controller
                 $commentReplie->user;
             }
         }
-
+        if (Auth::check()) {
+            Auth::user()->role;
+        }
         return Response()->json(['etat' => true, 'data' => $comments]);
     }
 }

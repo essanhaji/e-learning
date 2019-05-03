@@ -6,20 +6,12 @@
             action: true,
             comment: {
                 id:0,
-                user_id: 3,
+                user_id: window.Laravel.user.id,
                 course_id: window.Laravel.course_id,
-                type:"",
+                type: window.Laravel.user.role.name,
                 comment:"",
-                created_at:"",
-                user:{
-                    id:0,
-                    role_id:0,
-                    name:"",
-                    email:"",
-                    avatar:"",
-                    created_at:""
-                },
-                comment_replies:[]
+                user: window.Laravel.user,
+                commentReplies:[]
             },
             comment_reply:{
                 id:0,
@@ -37,47 +29,47 @@
             //     return dateFormat(date, "d, mm, y - h:MM:ss");
             // },
             getComments:function(){
-                axios.get(window.Laravel.url+'/courses/comments/getcomment/'+this.comment.course_id)
+                axios.get(window.Laravel.url+'/courses/comments/getcomment/'+window.Laravel.course_id)
                 .then(response => {
                     this.comments = response.data.data;
                     console.log(response.data);
+                    console.log(this.comment);
                 })
                 .catch(error => {
                     console.log('errors : ', error)
                 })
             },
-        //     preperaddExperience:function(){
-        //         this.action = true;
-        //         this.experience = {
-        //             id:0,
-        //             user_id:{{ Auth::user()->id }},
-        //             start_date:"",
-        //             end_date:"",
-        //             title:"",
-        //             speciality:"",
-        //             description:""
-        //         }
-        //     },
-        //     addExperience:function(){
-        //         axios.post(window.Laravel.url+'/candidate/candidate-profile/addExperience', this.experience)
-        //         .then(response => {
-        //             if(response.data.etat){
-        //                 this.experiences.unshift(this.experience);
-        //                 this.experience = {
-        //                     id:0,
-        //                     user_id:{{ Auth::user()->id }},
-        //                     start_date:"",
-        //                     end_date:"",
-        //                     title:"",
-        //                     speciality:"",
-        //                     description:""
-        //                 }
-        //             }
-        //         })
-        //         .catch(error => {
-        //             console.log('errors : ', error)
-        //         })
-        //     },
+            // preperaddComment:function(){
+            //     this.experience = {
+            //         id:0,
+            //         user_id:"",
+            //         start_date:"",
+            //         end_date:"",
+            //         title:"",
+            //         speciality:"",
+            //         description:""
+            //     }
+            // },
+            addComment:function(){
+                axios.post(window.Laravel.url+'/courses/comments/getcomment/', this.comment)
+                .then(response => {
+                    if(response.data.etat){
+                        this.comments.unshift(this.comment);
+                        this.experience = {
+                            id:0,
+                            user_id:"",
+                            start_date:"",
+                            end_date:"",
+                            title:"",
+                            speciality:"",
+                            description:""
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.log('errors : ', error)
+                })
+            },
         //     editExperience:function(experience){
         //         this.action = false;
         //         this.experience = experience;
