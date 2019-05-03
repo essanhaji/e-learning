@@ -1,0 +1,177 @@
+
+
+
+
+INSERT INTO `teachers` (`id`, `description`, `slug`, `created_at`, `updated_at`, `user_id`, `category_id`, `phone`, `skype`, `linkedin`, `facebook`, `twitter`, `youtube`) VALUES (1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ulla mco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.', 'teacher-teacher', '2019-04-18 10:17:20', '2019-04-18 10:46:18', 1, 1, '+212 641 966 888', 'skype.e-learning', 'https://www.linkedin.com/feed/', 'https://www.facebook.com/', 'https://twitter.com/', 'https://www.youtube.com/');
+INSERT INTO `teachers` (`id`, `description`, `slug`, `created_at`, `updated_at`, `user_id`, `category_id`, `phone`, `skype`, `linkedin`, `facebook`, `twitter`, `youtube`) VALUES (2, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ulla mco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.', '', '2019-04-18 10:19:06', '2019-04-18 10:48:58', 2, 2, '+212 641 966 888', 'skype.e-learning', 'https://www.linkedin.com/feed/', 'https://www.facebook.com/', 'https://twitter.com/', 'https://www.youtube.com/');
+INSERT INTO `teachers` (`id`, `description`, `slug`, `created_at`, `updated_at`, `user_id`, `category_id`, `phone`, `skype`, `linkedin`, `facebook`, `twitter`, `youtube`) VALUES (3, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ulla mco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.', '', '2019-04-24 14:05:07', '2019-04-24 14:05:07', 1, 3, '+212 641 966 888', 'skype.e-learning', 'https://www.linkedin.com/feed/', 'https://www.facebook.com/', 'https://twitter.com/', 'https://www.youtube.com/');
+INSERT INTO `teachers` (`id`, `description`, `slug`, `created_at`, `updated_at`, `user_id`, `category_id`, `phone`, `skype`, `linkedin`, `facebook`, `twitter`, `youtube`) VALUES (4, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ulla mco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.', '', '2019-04-24 14:05:49', '2019-04-24 14:11:14', 2, 4, '+212 641 966 888', 'skype.e-learning', 'https://www.linkedin.com/feed/', 'https://www.facebook.com/', 'https://twitter.com/', 'https://www.youtube.com/');
+
+
+
+
+
+
+<ul class="course-meta desc">
+                                <li>
+                                    <h6>{{ str_limit($course->created_at, 10, '') }}</h6>
+                                    <span>Started at</span>
+                                </li>
+
+                                <li>
+                                    <h6>{{ $course->duration }}</h6>
+                                    <span>Hours</span>
+                                </li>
+
+                                <li>
+                                    <h6><a href="{{ url('courses/category/'.$course->category->slug) }}">{{ str_limit($course->category->name, 12) }}</a></h6>
+                                    <span>Category</span>
+                                </li>
+
+                                <li>
+                                    @if($course->price != 0)
+                                    <h6><span style="background-color: #ffaa30;" class="badge badge-warning">{{ $course->price }} DH</span></h6>
+                                    <span> Price</span>
+                                    @else
+                                    <h6><span style="background-color: #ffaa30; color: black" class="badge badge-warning">Free</span></h6>
+                                    <span> For Free</span>
+                                    @endif
+                                </li>
+
+                            </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="comment-post">
+                        <div class="comment-list-wrap">
+                            <h4 class="title comment-title">Comments ({{ $cours->nbrComments() }}) </h4>
+                            <ul class="comment-list">
+                                @foreach($cours->comments as $comment)
+                                @if($comment->type == "Student" && $comment->student_id != 0)
+                                <li>
+                                    <article class="comment">
+                                        <div class="comment-avatar thmub">
+                                            <img style="border-radius: 90px;" src="{{ asset('storage/'.$comment->student->avatar) }}"  width="90px" alt="{{ $comment->student->last_name }}">
+                                        </div>
+                                        <div class="comment-detail">
+                                            <div class="comment-meta">
+                                                <p class="comment-author"><a>{{ $comment->student->name }}</a></p>
+                                                <p class="comment-date">{{ $cours::dateComment($comment->updated_at) }} &nbsp;<span class="badge badge-warning">{{ $comment->type }}</span></p>
+                                            </div>
+                                            <p class="comment-body">{{ $comment->comment }}</p>
+                                            <a href="courses-single.html#" class="comment-reply">Reply</a>
+                                        </div><!-- /.comment-detail -->
+                                    </article><!-- /.comment -->
+                                </li>
+                                @elseif($comment->type == "Teacher"  && $comment->teacher_id != 0)
+                                <li>
+                                    <article class="comment">
+                                        <div class="comment-avatar thmub">
+                                            <img style="border-radius: 90px;" src="{{ asset('storage/'.$comment->teacher->user->avatar) }}"  width="90px" alt="{{ $comment->teacher->user->name }}">
+                                        </div>
+                                        <div class="comment-detail">
+                                            <div class="comment-meta">
+                                                <p class="comment-author"><a href="{{ url('teachers/'.$commentReply->teacher->slug ) }}" >{{ $comment->teacher->user->name }}</a></p>
+                                                <p class="comment-date">{{ $cours::dateComment($comment->updated_at) }} &nbsp;<span class="badge badge-warning" style="background-color:#ffaa30">{{ $commentReply->type }}</span></p>
+                                            </div>
+                                            <p class="comment-body">{{ $comment->comment }}</p>
+                                            <a href="courses-single.html#" class="comment-reply">Reply</a>
+                                        </div><!-- /.comment-detail -->
+                                    </article><!-- /.comment -->
+                                </li>
+                                @endif
+                                    @foreach($comment->commentReplies as $commentReply)
+                                    @if($commentReply->type == "Student"  && $commentReply->student_id != 0)
+                                    <li>
+                                        <article class="comment style1">
+                                            <div class="comment-avatar">
+                                            <img style="border-radius: 90px;" src="{{ asset('storage/'.$commentReply->student->avatar) }}"  width="80px" alt="{{ $commentReply->student->name }}">
+                                            </div>
+                                            <div class="comment-detail">
+                                                <div class="comment-meta">
+                                                    <p class="comment-author"><a>{{ $comment->student->name }}</a></p>
+                                                    <p class="comment-date">{{ $cours::dateComment($comment->updated_at) }} &nbsp;<span class="badge badge-warning">{{ $commentReply->type }}</span></p>
+
+                                                </div>
+                                                <p class="comment-body">{{ $commentReply->comment }}</p>
+                                                <a href="courses-single.html#" class="comment-reply">Reply</a>
+                                            </div><!-- /.comment-detail -->
+                                        </article><!-- /.comment -->
+                                    </li>
+                                    @elseif($commentReply->type == "Teacher"  && $commentReply->teacher_id != 0)
+                                    
+                                    <li>
+                                        <article class="comment style1">
+                                            <div class="comment-avatar">
+                                            <img style="border-radius: 90px;" src="{{ asset('storage/'.$commentReply->teacher->user->avatar) }}"  width="80px" alt="{{ $commentReply->teacher->user->name }}">
+                                            </div>
+                                            <div class="comment-detail">
+                                                <div class="comment-meta">
+                                                    <p class="comment-author"><a href="{{ url('teachers/'.$commentReply->teacher->slug ) }}" >{{ $commentReply->teacher->user->name }}</a></p>
+                                                    <p class="comment-date">{{ $cours::dateComment($comment->updated_at) }} &nbsp;<span class="badge badge-warning" style="background-color:#ffaa30">{{ $commentReply->type }}</span></p>
+
+                                                </div>
+                                                <p class="comment-body">{{ $commentReply->comment }}</p>
+                                                <a href="courses-single.html#" class="comment-reply">Reply</a>
+                                            </div><!-- /.comment-detail -->
+                                        </article><!-- /.comment -->
+                                    </li>
+                                    @endif
+                                    @endforeach
+                                   
+                                    @endforeach
+                            </ul><!-- /.comment-list -->
+
+                            <div id="respond" class="comment-respond">
+                                    <h4 class="title comment-title style1">Leave a comment</h4>
+                                    <p>Your email address will not be published. Required fields are marked *</p>
+                                    <form class="flat-contact-form" id="contactform6" method="post" action="http://themesflat.com/html/educate/contact/contact-process.php">
+                                    
+                                        <input type="text" value="" tabindex="1" placeholder="Name*" name="name" id="name" required="" style="">
+                                        
+                                        <input type="email" value="" tabindex="2" placeholder="Email" name="email" id="email-contact1" required="">
+
+                                        <textarea class="type-input" tabindex="3" placeholder="Comment*" name="message" id="message-contact1" required=""></textarea>
+                                
+                                        <button class="flat-button bg-orange">Post Comment</button>
+                           
+                                    </form>
+                                </div>
+
+                        </div><!-- /.comment-list-wrap -->
+                    </div><!-- /.comment-post -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,1590 @@
+/** 
+*	Row
+*	Button
+*	Title section
+*	Flat divider
+*	Iconbox
+*	Icon box left
+*	Flat contact us
+*	Flat list
+*	Flat title box
+*	Flat price table
+*	Flat accordion
+*	Flat tabs
+*	Content box
+*	Flat information box
+*	Contact form
+*	flat-counter
+*	flat portfolio
+*	Portfolio Detail
+*	Related-portfolio
+*	flat-testimonials
+*	Progress Bar
+*	flat-team
+*	flat-socials
+*/
+
+/* Row
+-------------------------------------------------------------- */
+.flat-row {
+    clear: both;
+    display: block;
+    position: relative;
+    padding: 93px 0 92px;    
+}
+
+.flat-row.row-bg {
+    background-color: #fcfcfc;
+}
+
+.flat-row.pad-top-134 {
+    padding-top: 134px;
+}
+
+.flat-row.pad-top-100 {
+    padding-top: 100px;
+}
+
+.flat-row.pad-bottom-100 {
+    padding-bottom: 100px;
+}
+
+.flat-row.pad-bottom-30 {
+    padding-bottom: 30px;
+}
+
+.pad-top-96 {
+    padding-top: 96px;
+}
+
+.fr {
+    float: right;
+}
+
+.mgbt-36 {
+    margin-bottom: 36px;
+}
+
+.mgbt-17 {
+    margin-bottom: 17px;
+}
+
+.mgbt-48 {
+    margin-bottom: 48px;
+}
+
+.mgbt-26 {
+    margin-bottom: 26px;
+}
+/* Flat Grid
+-------------------------------------------------------------- */
+.flat-grid {
+    margin: 0 -15px;
+}
+
+.flat-col-half,
+.flat-col-three,
+.flat-col-four,.flat-col-six {   
+    padding: 0 15px ;
+    float: left;
+}
+
+.flat-offset {
+    margin-right: 8.333333333333333%;
+}
+
+.flat-col-half {
+    width: 50%;
+}
+
+.flat-col-three {
+    width: 33.333333333333336%;;
+}
+
+.flat-col-four {
+    width: 25%;
+}
+
+.flat-col-six{
+    width: 50%;
+}
+
+/* Margin 20px */
+.flat-grid.margin20px {
+    margin: 0 -20px;
+}
+
+.flat-grid.margin20px .flat-col-half,
+.flat-grid.margin20px .flat-col-three,
+.flat-grid.margin20px .flat-col-four {   
+    padding: 0 20px 40px 20px;
+    float: left;
+}
+
+.flat-lh-28 {
+    line-height: 28px;
+}
+
+.read-more, .read-more:after {
+    color: #ffaa30;
+    -webkit-transition: all 0.3s ease-in-out;
+        -moz-transition: all 0.3s ease-in-out;
+        -ms-transition: all 0.3s ease-in-out;
+         -o-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;   
+}
+
+.read-more:after {
+    content: "\f178";
+    font-family: FontAwesome;
+    padding-left: 10px;
+}
+
+.read-more:hover {
+    color: #333;
+}
+
+.read-more:hover:after {
+    color: #333;
+    padding-left: 15px;   
+}
+
+.wrap-grid {
+    margin: 0 -10px;
+    overflow: hidden;
+}
+
+.col-half {
+    width: 48.29059829059829%;
+    float: left;
+    background-color: #feb800;
+    margin: 0 0.854700854700855%;
+    /*margin-right: 1.70940170940171%;*/
+}
+
+.bg-color-red {
+    background-color: #f96868;
+}
+
+.col-last {
+    margin-right: 0;
+}
+
+/* On three */
+
+.wrap-flat-grid {
+    margin: 0 -15px;
+    overflow: hidden;
+}
+
+.col-three {
+    width: 30.76923076923077%;
+    float: left;
+    margin: 0 1.282051282051282%;
+}
+
+/* On Four */
+.col-four {
+    width: 22.43589743589744%;
+    float: left;
+    margin: 0 1.282051282051282%;
+}
+
+/* Bg-overlay */
+
+/* Flat padding
+-------------------------------------------------------------- */
+.flat-no-pdr {
+    padding-right: 0;
+}
+
+.flat-no-pdl {
+    padding-left: 0;
+}
+
+.flat-no-pd {
+    padding: 0;
+}
+/* Button
+-------------------------------------------------------------- */
+
+/* Flat button
+-------------------------------------------------------------- */
+.flat-button {
+    color: #ffffff;
+    display: inline-block;
+    font-weight: 400;
+    line-height: 46px;
+    padding: 0 17px;
+    text-transform: uppercase;
+    position: relative;
+    border: 2px solid #fff;
+    font-size: 14px;
+    font-family: "Montserrat", sans-serif;
+    -webkit-transition: all 0.3s ease-in-out;
+       -moz-transition: all 0.3s ease-in-out;
+        -ms-transition: all 0.3s ease-in-out;
+         -o-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+            border-radius: 2px;
+}
+
+.flat-button:hover {
+    background: #ffaa30;
+    border-color: #ffaa30;
+    color: #fff;
+}
+
+.flat-button.orange {
+    color: #ffaa30;    
+    border-color: #ffaa30;
+}
+
+.flat-button.orange:hover {
+    color: #fff;
+}
+
+.flat-button.bg-orange {
+    background: #ffaa30;    
+    border-color: #ffaa30;
+}
+
+.flat-button.bg-orange:hover {
+    background-color: #222;
+    border-color: #222;
+    color: #fff;
+}
+
+.flat-button.blue {
+    background-color: #428bdc;
+    border-color: #428bdc;
+    color: #fff;
+}
+
+.flat-button.blue:hover {
+    background: #ffaa30;    
+    border-color: #ffaa30;
+}
+
+/* Button background white */
+
+/* Button background black */
+/* Button background theme */
+/* Title section
+-------------------------------------------------------------- */
+.flat-title-section {
+    position: relative;
+    margin-bottom: 49px;
+    padding-bottom: 15px;
+}
+
+.flat-title-section h1 {
+    margin-bottom: 0px;
+}
+
+.flat-title-section:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 35px;
+    height: 1px;
+    background: #333;
+    left:0;
+}
+
+/* Flat contact form
+-------------------------------------------------------------- */
+.flat-contact-form .wrap-type-input {
+    overflow: hidden;
+}
+
+.flat-contact-form label.error {
+    font-size: 11px;
+    font-style: italic;
+    color: #ffaa30;
+    margin-top: -15px;
+}
+
+.comment-respond.style2 input[type="text"] {
+    margin-bottom: 30px;
+}
+
+.contact .comment-form .name-container, .flat-contact-form .input-wrap.name {
+    width: 32%;
+    float: left;
+    margin-right: 2%;
+}
+
+.flat-contact-form .input-wrap::before, .flat-contact-form .textarea-wrap:before {
+    content: "\f007";
+    font-family: "FontAwesome";
+    font-size: 14px;
+    line-height: 23px;
+    position: absolute;
+    top: 13px;
+    left: 15px;
+    color: #bcbcbc;
+}
+
+.flat-contact-form textarea{
+    padding: 16px 21px;
+    height: 200px;
+    margin-bottom: 23px;
+    max-width: 669px;
+}
+
+.flat-contact-form.style2 input[type="text"], .flat-contact-form.style2 input[type="email"] {
+    padding-left: 45px;
+    padding-top: 15px;
+}
+
+.flat-contact-form.style2 #name {
+    padding-left: 36px;
+}
+
+.flat-contact-form.style2 textarea{
+    max-width: 100%;
+    height: 220px;
+    padding-left: 44px;
+}
+
+.flat-contact-form.style2 .input-wrap::before, .flat-contact-form.style2 .textarea-wrap:before {
+    top: 14px;
+    left: 19px;
+}
+
+.flat-contact-form .submit-wrap button {
+    padding-right: 24px;
+    padding-left: 26px;
+}
+
+.flat-contact-form .textarea-wrap:before {
+    content: "\f075";
+}
+
+.flat-contact-form .input-wrap.Subject:before {
+    content: "\f084";
+}
+
+.flat-contact-form .input-wrap.email:before {
+    content: "\f0e0";
+}
+
+.contact .comment-form .email-container, .flat-contact-form .input-wrap.email {
+    float: left;
+    width: 32%;
+}
+
+.contact .comment-form .subject-container, .flat-contact-form .input-wrap.Subject {
+    float: right;
+    width: 32%;
+}
+
+.flat-contact-form .input-wrap, .flat-contact-form .textarea-wrap {
+    position: relative;
+}
+/* Iconbox
+-------------------------------------------------------------- */
+.contact-content {
+    text-align: center;
+    border: 2px solid #e5e5e5;
+    -webkit-transition: all 0.3s ease-in-out;
+        -moz-transition: all 0.3s ease-in-out;
+        -ms-transition: all 0.3s ease-in-out;
+         -o-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;   
+}
+
+.contact-content:hover {
+    -webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.06);
+    -moz-box-shadow: 0 0 15px rgba(0, 0, 0, 0.06);
+    -ms-box-shadow: 0 0 15px rgba(0, 0, 0, 0.06);
+    -o-box-shadow: 0 0 15px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.06);
+    -webkit-transform: translateY(-10px);
+    -moz-transform: translateY(-10px);
+    -ms-transform: translateY(-10px);
+    -o-transform: translateY(-10px);
+    transform: translateY(-10px);
+}
+
+.contact-content .contact-address {
+    padding: 53px 40px 59px;
+    position: relative;
+}
+
+.contact-address .style1 img {
+    margin-top: -128px;
+}
+
+.contact-address .style1 img:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 90px;
+    height: 90px;
+    background: yellow;
+    border: 1px solid #000;
+}
+
+.contact-content .details h5 {
+    font-family: "montserrat",sans-serif;
+    font-size: 20px;
+    color: #333333;
+    line-height: 25px;
+    margin-bottom: 17px;
+}
+
+.contact-content .details p {
+    margin-bottom: 1px;
+}
+
+/* Icon left */
+/* Flat contact us
+-------------------------------------------------------------- */
+
+
+/* Flat list
+-------------------------------------------------------------- */
+/* Flat title box
+-------------------------------------------------------------- */
+
+.title-pd135 .box-title {
+    padding-right: 135px;
+}
+
+/* Flat price table
+-------------------------------------------------------------- */
+
+/* Flat accordion
+-------------------------------------------------------------- */
+
+/* Flat tabs
+-------------------------------------------------------------- */
+.flat-tabs ul.menu-tab {
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 50px;
+}
+
+.flat-tabs ul.menu-tab:after {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 2px;
+    background-color: #eeeeee;
+    content: "";
+    z-index: 2;
+}
+
+.flat-tabs ul.menu-tab li {
+    display: inline-block;    
+}
+
+.flat-tabs ul.menu-tab li a {
+    position: relative;
+    z-index: 10;
+    background-color: #fff;
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+    text-align: center;    
+    border: 2px solid #eeeeee;
+    list-style-type: none;
+    border-radius: 50%;
+    margin-right: 200px;
+    display: block;
+}
+
+.flat-tabs ul.menu-tab li a:before,
+.flat-tabs ul.menu-tab li a:after {
+    width: 20px;
+    height: 2px;
+    background-color: #fff;
+    content: "";
+    top: 50%;
+    left: -22px;
+    position: absolute;
+}
+
+.flat-tabs ul.menu-tab li a:after {
+    left: 100%;
+    margin-left: 2px;
+}
+
+.flat-tabs ul.menu-tab li.active a,
+.flat-tabs ul.menu-tab li a:hover {
+    border: 2px solid #ffaa30;
+    color: #fff; 
+    background-color: #ffaa30;
+    color: #fff;
+}
+
+.flat-tabs ul.menu-tab li:last-child a {
+    margin-right: 0;
+}
+
+.flat-tabs ul.menu-tab li a {
+    font-family: "montserrat", sans-serif;
+    font-weight: 700;  
+    color: #999999;
+    font-size: 16px;
+}
+
+.flat-tabs .flat-title {
+    margin-bottom: 34px;
+}
+
+.flat-tabs .content-tab .text-tab {
+    width: 59.82905982905983%;
+    float: left;
+    padding-right: 60px;
+    padding-top: 5px;
+}
+
+.flat-tabs .content-tab .images-tab {
+    width: 40.17094017094017%;
+    float: left;
+}
+
+.flat-tabs .content-tab p {
+    margin-bottom: 20px;
+}
+
+/* Flat-list
+-------------------------------------------------------------- */
+ul.flat-list {
+    padding: 0 0 0 22px;
+    margin: 0;
+}
+
+ul.flat-list li {
+    padding: 6px 0 6px 24px;
+    position: relative;
+}
+
+ul.flat-list li:before {
+    position: absolute;
+    left: 0;
+    top: 4px;
+    font-family: "FontAwesome";
+    content: "\f00c";
+    font-size: 14px;
+    color: #ffaa30;
+}
+
+ul.flat-list li:before {
+    color: #333;
+}
+/* Content box
+-------------------------------------------------------------- */
+
+/* Flat information box
+-------------------------------------------------------------- */
+
+.course-single .course-entry .curriculum-section .title {
+    padding-top: 40px;
+}
+
+/* Flat curriculumn
+-------------------------------------------------------------- */
+
+ul.curriculum li.section {
+    margin-bottom: 30px;
+    border: 1px solid #e5e5e5;
+    padding: 38px 28px 14px;
+    background: #fdfdfd;
+}
+
+
+ul.curriculum li.section .section-title {
+    margin-bottom: 26px;
+    word-spacing: 1px;
+    letter-spacing: -0.2px;
+}
+
+ul.curriculum li ul.section-content li.course-lesson {
+    border-top: 1px solid #e5e5e5;
+    line-height: 65px;
+    counter-increment: step-counter;
+}
+
+ul.curriculum li ul.section-content li.course-lesson:before {
+    content: counter(step-counter) ".";
+    margin-right: 5px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #333;
+    font-family: poppins, sans-serif;
+}  
+
+ul.curriculum li ul.section-content li.course-lesson i {
+    font-size: 13px;
+    color: #697ea4;
+    padding-right: 9px;
+}
+
+ul.curriculum li ul.section-content li.course-lesson .index.index1 {
+    padding-right: 60px;
+}
+
+ul.curriculum li ul.section-content li.course-lesson .lesson-title {
+    font-size: 13px;
+    padding-right: 12px;
+}
+
+ul.curriculum li ul.section-content li.course-lesson .lesson-title:hover {
+    color: #ffaa30;
+}
+
+ul.curriculum li ul.section-content li.course-lesson .lesson-preview {
+    display: inline-block;
+    color: #fff;
+    font-size: 12px;
+    line-height: 24px;
+    border-radius: 2px;
+    -webkit-transition: all 0.3s ease-in-out;
+        -moz-transition: all 0.3s ease-in-out;
+        -ms-transition: all 0.3s ease-in-out;
+         -o-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;   
+    background: #428bdc;
+    padding:0 12px;
+}
+
+ul.curriculum li ul.section-content li.course-lesson span.lesson-preview {
+    background: #c3c3c3;
+    margin-left: 4px;
+    padding-right: 16px;
+}
+
+ul.curriculum li ul.section-content li.course-lesson a.lesson-preview:hover {
+    background: #ffaa30;
+}
+
+ul.curriculum li ul.section-content li.course-lesson .meta {
+    float: right;
+}
+
+ul.curriculum li ul.section-content li.course-lesson .fr {
+    padding-right: 12px;
+}
+
+ul.curriculum li ul.section-content li.course-lesson .fr span,
+ul.curriculum li ul.section-content li.course-lesson .fr a {
+    position: relative;
+    padding-left: 17px;
+    margin-left: 15px;
+}
+
+ul.curriculum li ul.section-content li.course-lesson .fr span:before,
+ul.curriculum li ul.section-content li.course-lesson .fr a:before {
+    font-family: FontAwesome;
+    font-size:13px;
+    left: 0;
+    position: absolute;
+}
+
+ul.curriculum li ul.section-content li.course-lesson .attrachment:before {
+    content: "\f1c1";
+}
+
+ul.curriculum li ul.section-content li.course-lesson .attrachment-video:before {
+    content: "\f144";
+}
+
+ul.curriculum li ul.section-content li.course-lesson .duration:before {
+    content: "\f017";
+}
+
+ul.curriculum li ul.section-content li.course-lesson .question:before {
+    content: "\f059";
+}
+/* Flat accordion
+-------------------------------------------------------------- */
+.flat-accordion .flat-toggle {
+    padding-left: 58px;
+    border: 2px solid #e5e5e5;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.flat-accordion .toggle-content {
+    font-size: 14px;
+    line-height: 25px;
+}
+
+.flat-accordion .toggle-content .faq-img {
+    float: left;
+    margin-right: 30px;
+    margin-top: 7px;
+}
+
+.flat-accordion .toggle-content > div {
+    overflow: hidden;
+}
+
+.flat-accordion .toggle-content > div p{
+    margin-bottom: 10px;
+}
+
+.flat-toggle:before {
+    position: absolute;
+    left: 22px;
+    top: 14px;
+    content: "";
+    width: 14px;
+    border: 2px solid #ffaa30;
+    background: #ffaa30;
+    height: 14px;
+    -webkit-border-radius: 50%;
+       -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+         -o-border-radius: 50%;
+            border-radius: 50%;
+}
+
+.flat-accordion .flat-toggle h6.toggle-title {
+    position: relative;
+    cursor: pointer;
+    color: #424242;
+    line-height: 46px;
+    margin-bottom: 0;
+}
+
+.flat-accordion .flat-toggle h6.toggle-title:after {
+    position: absolute;
+    left: -34px;
+    top: 20px;
+    content: "";
+    width: 10px;
+    height: 2px;
+    background-color: #fff;
+}
+
+.flat-accordion .flat-toggle h6.toggle-title:before {
+    position: absolute;
+    left: -30px;
+    top: 16px;
+    content: "";
+    width: 2px;
+    height: 10px;
+    background-color: #fff;
+}
+
+.flat-accordion .flat-toggle h6.toggle-title.active:before {
+    display: none;
+}
+
+.flat-accordion .flat-toggle .toggle-content {
+    display: none;
+    margin-left: -5px;
+    padding: 10px 22px 20px 0px;
+}
+/* form
+-------------------------------------------------------------- */
+/* Border-white */
+.border-white select,
+.border-white textarea,
+.border-white input[type="text"],
+.border-white input[type="password"],
+.border-white input[type="datetime"],
+.border-white input[type="datetime-local"],
+.border-white input[type="date"],
+.border-white input[type="month"],
+.border-white input[type="time"],
+.border-white input[type="week"],
+.border-white input[type="number"],
+.border-white input[type="email"],
+.border-white input[type="url"],
+.border-white input[type="search"],
+.border-white input[type="tel"],
+.border-white input[type="color"] {
+    border-color: #eeeeee;
+    background-color: transparent;
+}
+
+.border-white textarea:-moz-placeholder,
+.border-white textarea::-moz-placeholder,
+.border-white input:-moz-placeholder,
+.border-white input::-moz-placeholder {       
+    color: #ffffff;
+    opacity: 1;
+}
+
+.border-white input:-ms-input-placeholder {
+    color: #ffffff;
+}
+
+.border-white textarea::-webkit-input-placeholder,
+.border-white input::-webkit-input-placeholder {
+    color: #ffffff;
+    opacity: 1;
+}
+
+/* Border large */
+.border-large select,
+.border-large textarea,
+.border-large input[type="text"],
+.border-large input[type="password"],
+.border-large input[type="datetime"],
+.border-large input[type="datetime-local"],
+.border-large input[type="date"],
+.border-large input[type="month"],
+.border-large input[type="time"],
+.border-large input[type="week"],
+.border-large input[type="number"],
+.border-large input[type="email"],
+.border-large input[type="url"],
+.border-large input[type="search"],
+.border-large input[type="tel"],
+.border-large input[type="color"] {
+    border-width: 2px;
+}
+
+/* Border radius */
+.border-radius select,
+.border-radius input[type="text"],
+.border-radius input[type="password"],
+.border-radius input[type="datetime"],
+.border-radius input[type="datetime-local"],
+.border-radius input[type="date"],
+.border-radius input[type="month"],
+.border-radius input[type="time"],
+.border-radius input[type="week"],
+.border-radius input[type="number"],
+.border-radius input[type="email"],
+.border-radius input[type="url"],
+.border-radius input[type="search"],
+.border-radius input[type="tel"],
+.border-radius input[type="color"] {
+    -webkit-border-radius: 50px;
+       -moz-border-radius: 50px;
+         -o-border-radius: 50px;
+            border-radius: 50px;
+}
+
+/* field-large */
+.field-large input[type="text"],
+.field-large input[type="password"],
+.field-large input[type="datetime"],
+.field-large input[type="datetime-local"],
+.field-large input[type="date"],
+.field-large input[type="month"],
+.field-large input[type="time"],
+.field-large input[type="week"],
+.field-large input[type="number"],
+.field-large input[type="email"],
+.field-large input[type="url"],
+.field-large input[type="search"],
+.field-large input[type="tel"],
+.field-large input[type="color"] {
+    height: 60px;    
+}
+
+/* text-large */
+.text-large select,
+.text-large textarea,
+.text-large input[type="text"],
+.text-large input[type="password"],
+.text-large input[type="datetime"],
+.text-large input[type="datetime-local"],
+.text-large input[type="date"],
+.text-large input[type="month"],
+.text-large input[type="time"],
+.text-large input[type="week"],
+.text-large input[type="number"],
+.text-large input[type="email"],
+.text-large input[type="url"],
+.text-large input[type="search"],
+.text-large input[type="tel"],
+.text-large input[type="color"] {
+    text-transform: uppercase;
+    font-weight: 700; 
+}
+
+/* text-center */
+.text-large select,
+.text-large textarea,
+.text-large input[type="text"],
+.text-large input[type="password"],
+.text-large input[type="datetime"],
+.text-large input[type="datetime-local"],
+.text-large input[type="date"],
+.text-large input[type="month"],
+.text-large input[type="time"],
+.text-large input[type="week"],
+.text-large input[type="number"],
+.text-large input[type="email"],
+.text-large input[type="url"],
+.text-large input[type="search"],
+.text-large input[type="tel"],
+.text-large input[type="color"] {
+    text-align: center;
+}
+
+
+/* flat-counter
+-------------------------------------------------------------- */
+/* flat-counter
+-------------------------------------------------------------- */
+.flat-counter {
+
+}
+
+.flat-counter .numb-count {
+    font-family: "Montserrat", sans-serif;
+    font-size: 65px;
+    line-height: 65px;
+    color: #FFAA30;
+    margin-bottom: 11px;
+}
+
+.flat-counter .numb-count.percent {
+    position: relative;
+}
+
+.flat-counter .numb-count.percent:after {
+    position: absolute;
+    right: 127px;
+    top: -10px;
+    content: "%";
+    font-size: 40px;
+    color: #FFAA30;
+}
+
+.flat-counter .name-count {
+    font-family: "montserrat", sans-serif;
+    font-size: 18px;
+    color: #fff;
+    margin-bottom: 18px;
+}
+
+.flat-counter .desc-count {
+    color: #fff;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+        filter: alpha(opacity=30);
+       opacity: 0.3;
+       line-height: 22px;
+}
+
+/* flat-Contact
+-------------------------------------------------------------- */
+.flat-contact .mail {
+    font-size: 30px;
+    line-height: 30px;
+    color: #fff;
+}
+
+.flat-contact .phcol {
+    font-size: 60px;
+    line-height: 60px;
+    color: #f96868;
+    font-weight: 900;
+    margin-bottom: 24px;
+}
+
+.flat-contact .address {
+    font-size: 24px;
+    line-height: 24px;
+    color: #4d4d4d;
+}
+
+
+
+/* Flat course 
+-------------------------------------------------------------- */
+.flat-course {
+    border-radius: 3px;
+}
+
+.flat-course img {
+    width: 100%;
+}
+
+.flat-course .course-meta.review li {
+    margin-right: 14px;
+}
+
+.flat-course .course-meta li {
+    display: inline-block;
+    margin-right: 45px;
+    color: #999;
+    position: relative;
+    font-size: 12px;
+}
+
+.flat-course .course-meta.desc li:after {
+    width: 1px;
+    height: 40px;
+    background-color: #e5e5e5;    
+    position: absolute;
+    content: "";
+    right: -30px;
+    top: 0;
+}
+
+.flat-course .course-meta.desc li:last-child {
+    margin-right: 0;
+}
+
+.flat-course .course-meta.desc li:last-child:after {
+    content: none;
+}
+
+.flat-course .course-meta.review {
+    margin-bottom: 17px;
+}
+
+.flat-course .course.meta.review li {
+    padding-right: 11px;
+    padding-left: 0px;
+}
+
+.flat-course .course-meta.review li .thumb img{
+    width: 40px;
+    border-radius: 40px;
+}
+
+.flat-course .course-meta.desc li h6 {
+    margin-bottom: 6px;
+}
+
+.flat-course .course-content {
+    position: relative;
+    padding: 28px 29px 24px;
+    border-left: 1px solid #e5e5e5;
+    border-right: 1px solid #e5e5e5;
+    border-bottom: 3px solid #e5e5e5;    
+    box-shadow: 0px 2px 0px 0px rgba(229, 229, 229, 1) ; 
+    line-height: 22px;
+}
+
+.flat-course .course-content p:last-of-type {
+    margin-bottom: 28px;
+}
+
+.flat-course .course-content h4  {
+    margin-bottom: 9px;
+}
+
+.flat-course .course-content .price {
+    line-height: 32px;
+    color: #fff;
+    padding: 0 15px;
+    position: absolute;
+    right: -7px;
+    top: 22px;
+    background: #428bdc;
+    font-size: 17px;
+}
+
+.flat-course .course-content  .price:after, 
+.flat-course .course-content  .price:before {
+    content: '';
+    width: 0; 
+    height: 0; 
+    top: 0;
+    right: 0;
+    border-top: 7px solid transparent !important;
+    border-left: 7px solid #428bdc;
+    position: absolute;
+        transform: translateY(-100%);
+   -moz-transform: translateY(-100%);
+   - ms-transform: translateY(-100%);
+-webkit-transform: translateY(-100%);
+     -o-transform: translateY(-100%);
+}
+
+.flat-course .course-content .price:after {
+    border-color: #000;
+    opacity: 0.2;
+}
+
+.review-stars i {
+    color: #ffaa30;
+    font-size: 14px;
+}
+/* flat-Respond-form
+-------------------------------------------------------------- */
+.flat-respond-form {
+    /*margin-top: 50px;*/   
+}
+
+.flat-respond-form.short .input-wrap {  
+    width: 49.5%;
+    margin-right: 1%;
+    float: left;
+}
+
+.flat-respond-form .input-wrap {
+/*margin-bottom: 10px;*/
+    width: 100%;  
+}
+
+.flat-respond-form div {
+    margin-bottom: 20px;
+}
+
+.flat-respond-form .input-wrap.last {
+    margin-right: 0;
+}
+
+.flat-respond-form textarea:-moz-placeholder,
+.flat-respond-form textarea::-moz-placeholder,
+.flat-respond-form input:-moz-placeholder,
+.flat-respond-form input::-moz-placeholder {
+    /*color: #4d4d4d;*/
+    opacity: 1;
+}
+
+.flat-respond-form input:-ms-input-placeholder {
+    /*color: #4d4d4d;*/
+}
+
+.flat-respond-form textarea::-webkit-input-placeholder,
+.flat-respond-form input::-webkit-input-placeholder {
+    /*color: #4d4d4d;*/
+    opacity: 1;
+}
+
+.flat-respond-form .textarea-wrap textarea {
+    resize: ncol;
+}
+
+.flat-respond-form .input-wrap input, 
+.flat-respond-form .textarea-wrap textarea {  
+    background: rgba(0, 0, 0, 0.1);
+    /*color: #4d4d4d;*/
+    width: 100%;  
+    /*box-shadow: 0 -1px 0 #e4e4e4 inset;*/
+    /*border: 1px solid #e4e4e4;*/
+    border: ncol;
+    border-bottom: 3px solid rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1) inset;
+       -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1) inset;
+        -ms-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1) inset;
+         -o-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1) inset;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1) inset;
+
+    -webkit-border-radius: 3px;
+       -moz-border-radius: 3px;
+         -o-border-radius: 3px;
+            border-radius: 3px; 
+}
+
+.flat-respond-form input:focus, 
+.flat-respond-form textarea:focus {
+    border: 1px solid #f96868;
+    outline: 0;
+}
+
+.flat-respond-form textarea {
+    height: auto;
+}
+
+.flat-respond-form .submit-wrap {
+    /*margin-top: 40px;*/
+}
+
+.flat-respond-form .flat-button {
+    /* padding: 20px 36px;*/
+    background-color: #f1c40f;
+}
+
+.flat-respond-form label.error {
+    color: #f96868; 
+    font-style: italic; 
+    font-size: 13px; 
+    line-height: 30px;
+}
+
+.flat-respond-form input.error, 
+.flat-respond-form textarea.error {
+    border: 1px solid #f96868;
+}
+
+.flat-respond-form .loading {
+    display: inline-block; width: 16px; height: 16px; background: url(http://themesflat.com/html/educate/images/ajax-loader.gif) no-repeat center center;
+}
+
+/* Flat Porfolio 
+-----------------------------------------------------------------*/
+.portfolio-filter {
+    margin-bottom: 33px;
+    text-align: center;
+}
+
+.portfolio-filter li, .porfolio-filter li a {
+    display: inline-block;
+}
+
+.portfolio-filter li a {
+    font-size: 16px;
+    line-height: 16px;
+    color: #b1b1b1;
+    padding-right: 32px;
+    position: relative;
+    font-family: Montserrat, sans-serif;
+}
+
+.portfolio-filter li.active a {
+    color: #333;
+}
+
+.portfolio-filter li:last-child a {
+    padding-right: 0;
+}
+
+.portfolio-filter li:not(:last-child) a:after {
+    content: "|";
+    position: absolute;
+    right: 12px;
+    color: #b1b1b1;
+}
+
+/* Top 
+-----------------------------------------------------------------*/
+.top {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.text-information p {
+    font-family: Poppins, sans-serif;
+    font-size: 12px;
+    line-height: 23px;
+    padding-top: 14px;
+}
+
+.flat-information > li.email {
+    margin-left: 43px;
+}
+
+.flat-information > li {
+    display: inline-block;
+    position: relative;
+}
+
+.flat-information > li:before {
+    position: absolute;
+    left: -7px;
+    top: 12px;
+    font-size: 14px;
+    font-family: FontAwesome;
+    content: "\f095";
+    color: #424242;
+}
+
+.flat-information > li.email:before {
+    content: "\f0e0";
+}
+
+.flat-information > li > a {
+    display: inline-block;  
+    padding: 14px 0 10px 14px;
+    color: #676767; 
+    font-size: 12px;
+}
+
+.flat-information > li > a > i {
+    font-size: 14px;
+}
+
+.flat-socials > li.facebook {
+    padding-left: 20px;
+}
+
+.flat-socials, .flat-socials > li {
+    display: inline-block;
+}
+
+.flat-socials > li > a {
+    display: inline-block;  
+    padding: 14px 0 10px 14px;
+    color: #676767; 
+    font-size: 14px;
+}
+
+
+.flat-socials > li.facebook > a,
+.flat-information > li.facebook > a {
+    color: #4b6ea9;
+}
+
+
+.flat-socials > li.twitter > a,
+.flat-information > li.twitter > a {
+    color: #65bbf2;
+}
+
+.flat-socials > li.linkedin > a,
+.flat-information > li.linkedin > a {
+    color: #008bc2;
+}
+
+.flat-socials > li.youtube > a,
+.flat-information > li.youtube > a {
+    color: #f43522;
+}
+
+.flat-socials > li > a:hover, 
+.flat-information > li > a:hover {
+    color: #feb800; 
+}
+
+.text-information,
+.flat-information {
+    display: inline-block;
+}
+
+
+/* Flat spacer 
+--------------------------------------------------------------------------- */
+.flat-spacer {
+    height: 22px;
+}
+
+.flat-spacer.d74px {
+    height: 74px;
+}
+
+.h8px {
+    height: 8px;
+}
+
+.marginbt-12px {
+    margin-bottom: 12px;
+}
+/* Flat course images
+--------------------------------------------------------------------------- */
+.flat-course-images {
+    margin-right: -6px;
+    padding-top: 6px;
+}
+
+.flat-course-images li{
+    display: inline-block;
+    margin-right: 6px;
+    position: relative;
+    overflow: hidden;
+}
+
+.flat-course-images li:after {
+  background: #fff;
+  content: "";
+  height: 300px;
+  left: -150px;
+  opacity: .2;
+  position: absolute;
+  top: -50px;
+  -webkit-transform: rotate(35deg);
+          transform: rotate(35deg);
+  -webkit-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
+  transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
+  width: 50px;
+  z-index:10;
+}
+
+.flat-course-images li:hover:after {
+  left: 130%;
+  -webkit-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
+  transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+/* Flat teacher team
+--------------------------------------------------------------------------- */
+.flat-teacher .content {
+    padding: 30px;
+}
+
+.flat-teacher .content {
+    position: relative;
+    padding: 26px 29px 18px;
+    border-left: 1px solid #e5e5e5;
+    border-right: 1px solid #e5e5e5;
+    border-bottom: 3px solid #e5e5e5;
+    box-shadow: 0px 2px 0px 0px rgba(229, 229, 229, 1);
+    line-height: 22px;
+}
+
+.flat-teacher .content h4 {
+    margin-bottom: 17px;
+}
+
+.flat-teacher .flat-socials {
+    margin-bottom: 12px;
+}
+
+.flat-teacher .flat-socials > li:first-child, .flat-teacher .flat-socials > li:first-child a {
+    padding-left: 3px;
+}
+
+.flat-teacher .flat-socials > li {
+    padding: 0 1px;
+}
+
+.flat-teacher .flat-socials > li a {
+    line-height: 30px;
+    height: 30px;
+    width: 30px;
+    border: 1px solid #4b6ea9;
+    border-radius: 30px;
+    padding: 0;
+    text-align: center;
+}
+
+.flat-teacher .flat-socials > li.twitter a {
+    border-color: #65bbf2;
+}
+
+.flat-teacher .flat-socials > li.linkedin a {
+    border-color: #008bc2;
+}
+
+.flat-teacher .flat-socials > li.youtube a {
+    border-color: #f43522;
+}
+
+.flat-teacher .flat-socials > li:hover a {
+    border-color: #ffaa30;
+}
+
+.flat-teacher .flat-information > li:before {
+    top: 4px;
+    left: 0;
+}
+
+.flat-teacher .flat-information > li.email {
+    margin-left: 0;
+}
+
+.flat-teacher .flat-information > li a {
+    font-size: 13px;
+    line-height: 31px;
+    padding: 0 21px;
+}
+
+.flat-teacher .flat-information > li.position:before {
+    content: "\f006";
+}
+
+.flat-teacher .flat-information > li.skype:before {
+    content: "\f17e";
+}
+
+
+/* Flat carousel button right
+--------------------------------------------------------------------------- */
+.owl-controls {
+    text-align: center;
+}
+
+.button-right.owl-theme .owl-controls .owl-nav div:hover {
+    background-color: #ffaa30;
+    border-color: #ffaa30;
+}
+
+.button-right.owl-theme .owl-controls .owl-nav div:hover:before {
+    color: #fff;
+}
+
+.button-right.owl-theme .owl-controls .owl-nav div.owl-next {
+    top: -70px;
+    right: 0;    
+}
+
+.button-right.owl-theme .owl-controls .owl-nav div.owl-prev {
+    top: -70px;
+    right: 47px;
+    left: auto;
+}
+
+/* flat hover zoom */
+.flat-hover-zoom .entry-image img {
+-webkit-transform: scale(1);
+    -ms-transform: scale(1);
+        transform: scale(1);
+    -webkit-transition: 0.6s;
+    transition: 0.6s;
+}
+
+.flat-hover-zoom:hover .entry-image img {
+-webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+        transform: scale(1.1);
+}
+
+.flat-hover-zoom .entry-image {
+    overflow: hidden;
+}
+
+.widget-mailchimb form {
+    position: relative;
+}
+
+.widget-mailchimb #subscribe-email {
+    width: 100%;
+}
+
+.widget-mailchimb .subscribe-button {
+    right: 0;
+    top: 0;
+    position: absolute;
+}
+
+/* Flat course price 
+--------------------------------------------------------------------------- */
+.course-widget-price {
+    padding:38px 23px;
+    border-radius: 5px;
+    border: 1px solid #e3e3e3;
+}
+
+.course-widget-price .course-title {
+    padding-bottom: 17px;
+    position: relative;
+    margin-bottom: 17px;
+}
+
+.course-widget-price .course-title:after {
+    content: "";
+    height: 1px;
+    background: #000;
+    width: 35px;
+    bottom: 0;
+    position: absolute;
+    left: 0;
+}
+
+.course-widget-price ul {
+    margin-bottom: 17px;
+}
+
+.course-widget-price li {
+    font-size: 13px;
+    line-height: 49px;
+    border-bottom: 1px solid #e3e3e3;
+}
+
+.course-widget-price li i {
+    padding-right: 9px;
+    font-size: 14px;
+    padding-left: 2px;
+}
+
+.course-widget-price li span:last-child {
+    float: right;
+}
+
+.course-widget-price .bt-course span {
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.course-widget-price .flat-button {
+    line-height: 58px;
+    padding: 0 41px 0 38px;
+    letter-spacing: 0.4px;
+}
