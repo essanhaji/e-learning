@@ -58,6 +58,10 @@ Route::get('courses/teacher/{slug}', 'HomeCoursesController@index3');
 Route::get('courses/{slug}', 'HomeSinglCoursController@index');
 Route::post('courses/cours-single/addquestion', 'HomeSinglCoursController@addQuestion');
 Route::get('courses/comments/getcomment/{id}', 'HomeSinglCoursController@getComment');
+Route::post('courses/comments/addcomment', 'HomeSinglCoursController@addComment');
+Route::put('courses/comments/updatecomment', 'HomeSinglCoursController@updateComment');
+
+
 
 
 #.... All teachers

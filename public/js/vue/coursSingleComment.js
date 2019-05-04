@@ -1,99 +1,109 @@
-
-    var coursSingleComment = new Vue({
-        el:'#coursSingleComment',
-        data:{
-            comments:[],
-            action: true,
-            comment: {
-                id:0,
-                user_id: window.Laravel.user.id,
-                course_id: window.Laravel.course_id,
-                type: window.Laravel.user.role.name,
-                comment:"",
-                user: window.Laravel.user,
-                commentReplies:[]
-            },
-            comment_reply:{
-                id:0,
-                user_id: 3,
-                course_id: window.Laravel.course_id,
-                type:"",
-                comment:"",
-                comment_id:""
-            }
+var coursSingleComment = new Vue({
+    el: "#coursSingleComment",
+    data: {
+        comments: [],
+        action: false,
+        comment: {
+            id: 0,
+            user_id: window.Laravel.user.id,
+            course_id: window.Laravel.course_id,
+            type: window.Laravel.user.role.name,
+            comment: "",
+            user: window.Laravel.user,
+            commentReplies: []
         },
-        methods:{
-            // dateFormat:function(date){
-            //     var dateFormat = require('dateformat');
-            //     console.log(date);
-            //     return dateFormat(date, "d, mm, y - h:MM:ss");
-            // },
-            getComments:function(){
-                axios.get(window.Laravel.url+'/courses/comments/getcomment/'+window.Laravel.course_id)
-                .then(response => {
-                    this.comments = response.data.data;
-                    console.log(response.data);
-                    console.log(this.comment);
-                })
-                .catch(error => {
-                    console.log('errors : ', error)
-                })
-            },
-            // preperaddComment:function(){
-            //     this.experience = {
-            //         id:0,
-            //         user_id:"",
-            //         start_date:"",
-            //         end_date:"",
-            //         title:"",
-            //         speciality:"",
-            //         description:""
-            //     }
-            // },
-            addComment:function(){
-                axios.post(window.Laravel.url+'/courses/comments/getcomment/', this.comment)
-                .then(response => {
-                    if(response.data.etat){
-                        this.comments.unshift(this.comment);
-                        this.experience = {
-                            id:0,
-                            user_id:"",
-                            start_date:"",
-                            end_date:"",
-                            title:"",
-                            speciality:"",
-                            description:""
-                        }
-                    }
-                })
-                .catch(error => {
-                    console.log('errors : ', error)
-                })
-            },
-        //     editExperience:function(experience){
-        //         this.action = false;
-        //         this.experience = experience;
-        //     },
-        //     updateExperience:function(){
-        //     axios.put(window.Laravel.url+'/candidate/candidate-profile/updateExperience', this.experience)
-        //     .then(response => {
-        //         if(response.data.etat){
-        //             this.action = true; 
-        //             this.experience = {
-        //                 id:0,
-        //                 user_id:{{ Auth::user()->id }},
-        //                 start_date:"",
-        //                 end_date:"",
-        //                 title:"",
-        //                 speciality:"",
-        //                 description:""
-        //             }
-        //         }
-        //     })
-        //     .catch(error => {
-        //         console.log('errors : ', error)
-        //     })
+        comment_reply: {
+            id: 0,
+            user_id: 3,
+            course_id: window.Laravel.course_id,
+            type: "",
+            comment: "",
+            comment_id: ""
+        }
+    },
+    methods: {
+        // dateFormat:function(date){
+        //     var dateFormat = require('dateformat');
+        //     console.log(date);
+        //     return dateFormat(date, "d, mm, y - h:MM:ss");
         // },
+        getComments: function() {
+            axios
+                .get(
+                    window.Laravel.url +
+                        "/courses/comments/getcomment/" +
+                        window.Laravel.course_id
+                )
+                .then(response => {
+                    this.action = false;
+                    this.comments = response.data.data;
+                })
+                .catch(error => {
+                    console.log("errors : ", error);
+                });
+        },
+        addComment: function() {
+            this.$validator.validateAll().then(result => {
+                if (result) {
+                    axios
+                        .post(
+                            window.Laravel.url +
+                                "/courses/comments/addcomment/",
+                            this.comment
+                        )
+                        .then(response => {
+                            if (response.data.etat) {
+                                this.action = true;
+                                this.comments.unshift(response.data.comment);
+                                this.comment = {
+                                    id: 0,
+                                    user_id: window.Laravel.user.id,
+                                    course_id: window.Laravel.course_id,
+                                    type: window.Laravel.user.role.name,
+                                    comment: "Comment*",
+                                    user: window.Laravel.user,
+                                    commentReplies: []
+                                };
+                            }
+                        })
+                        .catch(error => {
+                            console.log("errors : ", error);
+                        });
+                    return;
+                }
+                alert("Correct them errors !!");
+            });
+        },
+        editComment:function(comment){
+            this.action = false;
+            this.comment = comment;
+        },
+            updateComment:function(){
+                this.$validator.validateAll().then(result => {
+                    if (result) {
+            axios.put(window.Laravel.url+'/courses/comments/updatecomment', this.comment)
+            .then(response => {
+                if(response.data.etat){
+                    this.action = true;
+                    this.comment = {
+                        id: 0,
+                        user_id: window.Laravel.user.id,
+                        course_id: window.Laravel.course_id,
+                        type: window.Laravel.user.role.name,
+                        comment: "Comment*",
+                        user: window.Laravel.user,
+                        commentReplies: []
+                    };
+                }
+            })
+            .catch(error => {
+                console.log('errors : ', error)
+            });
+            return;
+                }
+                alert("Correct them errors !!");
+            });
+        },
         // preperExperience:function(experience){
         //     this.experience = experience;
         // },
@@ -117,16 +127,11 @@
         //         console.log('errors : ', error)
         //     })
         // }
-        },
-        mounted: function(){
-            this.getComments();
-        }
-    });
-
-
-
-
-
+    },
+    mounted: function() {
+        this.getComments();
+    }
+});
 
 // var coursSingleComment = new Vue({
 //     el: "#coursSingleComment",

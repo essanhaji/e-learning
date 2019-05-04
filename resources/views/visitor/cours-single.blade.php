@@ -318,7 +318,7 @@
                                     <article class="comment">
                                         <div class="text-right">
                                             <a type="button" data-toggle="modal" data-target="#exampleModaAddReplay"><i class="fa fa-trash-o"></i></a>
-                                            <a type="button" data-toggle="modal" data-target="#exampleModaAddReplay"><i class="fa fa-edit"></i></a>
+                                            <a @click="editComment(comment)" type="button" data-toggle="modal" data-target="#exampleModalUpdateComment"><i class="fa fa-edit"></i></a>
                                         </div>
                                         <div class="comment-avatar thmub">
                                             <img style="border-radius: 90px;" :src="'{{ asset('storage/') }}/' + comment.user.avatar" width="90px" :alt="comment.user.name">
@@ -363,57 +363,75 @@
                                     </ul>
                                 </li>
 
-                                <!-- Modal -->
-                                <div style="margin-top: 100px" class="modal fade" id="exampleModaAddReplay" tabindex="-1" role="dialog" aria-labelledby="exampleModaAddReplay" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <div class="row">
-                                                    <div class="col-md-10">
-                                                        <h5 class="modal-title" id="exampleModalCenterTitle">Send us your questions :</h5>
-                                                    </div>
-                                                    <div class="col-md-2 text-right">
-                                                        <a style="color: red;" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="modal-body">
 
-                                                <p>Your email address will not be published. Required fields are marked *</p>
-                                                <form class="flat-contact-form" id="" @submit.prevent="">
-
-                                                    
-
-                                                    <button type="submit" class="flat-button bg-orange">Post Comment</button>
-                                                    <button class="btn btn-danger bg-danger" data-dismiss="modal" aria-label="Close">
-                                                        Close
-                                                    </button>
-
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
                                 
                             </ul><!-- /.comment-list -->
 
-                            <div id="respond" class="comment-respond">
+
+                                <!-- Modal -->
+                            <div style="margin-top: 100px" class="modal fade" id="exampleModalUpdateComment" tabindex="-1" role="dialog" aria-labelledby="exampleModaAddReplay" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <div class="row">
+                                                <div class="col-md-10">
+                                                    <h5 class="modal-title" id="exampleModalCenterTitle">Send us your questions :</h5>
+                                                </div>
+                                                <div class="col-md-2 text-right">
+                                                    <a style="color: red;" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <p>Your email address will not be published. Required fields are marked *</p>
+                                            <form class="flat-contact-form" id="updateComment" method="post"  @submit.prevent="updateComment">
+
+                                                <textarea v-validate="'required|min:2|max:255'" class="type-input" tabindex="3" placeholder="Comment*" name="comment" id="message-contact1" v-model="comment.comment"></textarea>
+                                                <div v-show="errors.has('comment')" class="invalid-feedback">
+                                                    <i v-show="errors.has('comment')" class="fa fa-warning"></i>    
+                                                            @{{ errors.first('comment') }}
+                                                </div>
+
+                                                <button type="submit" class="flat-button bg-orange">Edit</button>
+                                                <button class="btn btn-danger bg-danger" data-dismiss="modal" aria-label="Close">
+                                                    Close
+                                                </button>
+                                                <div v-if="action" id="subscribe-msg" style="width: 250px; margin-top: 10px">
+                                                    <div class="alert alert-success" role="alert">
+                                                        <strong>your comment is updated</strong>
+                                                    </div>
+                                                </div> 
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div id="formAddComment" class="comment-respond">
                                 <h4 class="title comment-title style1">Leave a comment</h4>
                                 <p>Your email address will not be published. Required fields are marked *</p>
 
-                                <form class="flat-contact-form" id="contactform6" method="post">
+                                <form class="flat-contact-form" id="contactform6" method="post"  @submit.prevent="addComment">
 
-                                    <input type="text" tabindex="1" placeholder="Name*" name="name" id="name">
+                                    <textarea v-validate="'required|min:2|max:255'" class="type-input" tabindex="3" placeholder="Comment*" name="comment" id="message-contact1" v-model="comment.comment"></textarea>
+                                    <div v-show="errors.has('comment')" class="invalid-feedback">
+                                        <i v-show="errors.has('comment')" class="fa fa-warning"></i>    
+                                                @{{ errors.first('comment') }}
+                                    </div>
 
-                                    <input type="email" tabindex="2" placeholder="Email" name="email" id="email-contact1" >
-
-                                    <textarea class="type-input" tabindex="3" placeholder="Comment*" name="message" id="message-contact1" ></textarea>
-
-                                    <button class="flat-button bg-orange">Post Comment</button>
-
+                                    <button class="flat-button bg-orange" type="submit" >Post Comment</button>
+                                    <br>
+                                    <div v-if="action" id="subscribe-msg" style="width: 250px; margin-top: 10px">
+                                        <div class="alert alert-success" role="alert">
+                                            <strong>your comment is added</strong>
+                                        </div>
+                                    </div> 
                                 </form>
                             </div>
 
@@ -522,7 +540,7 @@
         @php
             $cours->teacher->user->role;
         @endphp
-        window.Laravel.user.role = {!!json_encode($cours->teacher->user) !!};
+        window.Laravel.user = {!!json_encode($cours->teacher->user) !!};
     @else
         @auth
             @php

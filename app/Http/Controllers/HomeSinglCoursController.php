@@ -23,6 +23,7 @@ use App\Subscribe;
 use App\Contact;
 use App\CourseSession;
 use App\Comment;
+use App\User;
 
 class HomeSinglCoursController extends Controller
 {
@@ -60,6 +61,7 @@ class HomeSinglCoursController extends Controller
     }
 
 
+
     public function addQuestion(Request $request)
     {
         $question = new Question();
@@ -74,9 +76,10 @@ class HomeSinglCoursController extends Controller
         return Response()->json(['etat' => true]);
     }
 
+
+
     public function getComment(Request $request, $id)
     {
-
         $comments = Comment::where('course_id', '=', $id)
                             ->orderBy('updated_at', 'desc')
                             ->get(); 
@@ -94,5 +97,44 @@ class HomeSinglCoursController extends Controller
             Auth::user()->role;
         }
         return Response()->json(['etat' => true, 'data' => $comments]);
+    }
+
+
+
+    public function addComment(Request $request)
+    {
+        $comment = new Comment;
+        $comment->user_id = $request->input('user_id');
+        $comment->course_id = $request->input('course_id');
+        $comment->type = $request->input('type');
+        $comment->comment = $request->input('comment');
+        $comment->save();
+
+        $comment->user; 
+        $comment->commentReplies; 
+        foreach ($comment->commentReplies as $commentReplie) {
+            $commentReplie->user;
+        }
+        return Response()->json(['etat' => true, 'comment' => $comment]);
+    }
+
+
+    public function updateComment(Request $request)
+    {
+        $comment = Comment::whereId($request->input('id'))->first();
+
+        $comment->user_id = $request->input('user_id');
+        $comment->course_id = $request->input('course_id');
+        $comment->type = $request->input('type');
+        $comment->comment = $request->input('comment');
+
+        $comment->save();
+
+        $comment->user; 
+        $comment->commentReplies; 
+        foreach ($comment->commentReplies as $commentReplie) {
+            $commentReplie->user;
+        }
+        return Response()->json(['etat' => true, 'comment' => $comment]);
     }
 }
