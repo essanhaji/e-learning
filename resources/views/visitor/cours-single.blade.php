@@ -332,12 +332,12 @@
                                         <div class="comment-detail">
                                             <div class="comment-meta">
                                                 <p class="comment-author"><a>@{{ comment.user.name }}</a></p>
-                                                <p class="comment-date">@{{ comment.created_at }} &nbsp;<span class="badge badge-warning">@{{ comment.type }}</span></p>
+                                                <p v-if="comment.type.toUpperCase() == 'teacher'.toUpperCase()" class="comment-date">@{{ comment.created_at }} &nbsp;<span style="background-color: #ffaa30;" class="badge badge-warning">@{{ comment.type }}</span></p>
+                                                <p v-if="comment.type.toUpperCase() == 'student'.toUpperCase()" class="comment-date">@{{ comment.created_at }} &nbsp;<span class="badge badge-warning">@{{ comment.type }}</span></p>
                                             </div>
                                             <p class="comment-body">@{{ comment.comment }}</p>
                                             
-                                            <a type="button" data-toggle="modal" data-target="#exampleModaAddReplay" class="comment-reply">Reply</a>
-
+                                            <a @click="preperCommentReply(comment.id)" type="button" data-toggle="modal" data-target="#exampleModalAddCommentReply" class="comment-reply">Reply</a>
                                         </div><!-- /.comment-detail -->
                                     </article><!-- /.comment -->
 
@@ -356,12 +356,12 @@
                                         <div class="comment-detail">
                                             <div class="comment-meta">
                                                 <p class="comment-author"><a>@{{ commentReplie.user.name }}</a></p>
-                                                <p class="comment-date">@{{ commentReplie.created_at }} &nbsp;<span class="badge badge-warning">@{{ commentReplie.type }}</span></p>
+                                                <p v-if="commentReplie.type.toUpperCase() == 'teacher'.toUpperCase()" class="comment-date">@{{ commentReplie.created_at }} &nbsp;<span style="background-color: #ffaa30;" class="badge badge-warning">@{{ commentReplie.type }}</span></p>
+                                                <p v-if="commentReplie.type.toUpperCase() == 'student'.toUpperCase()" class="comment-date">@{{ commentReplie.created_at }} &nbsp;<span class="badge badge-warning">@{{ commentReplie.type }}</span></p>
                                             </div>
                                             <p class="comment-body">@{{ commentReplie.comment }}</p>
                                             
-                                            <a type="button" data-toggle="modal" data-target="#exampleModaAddReplay" class="comment-reply">Reply</a>
-
+                                            <a @click="preperCommentReply(comment.id)" type="button" data-toggle="modal" data-target="#exampleModalAddCommentReply" class="comment-reply">Reply</a>
                                         </div>
                                     </article>
 
@@ -375,7 +375,7 @@
                             </ul><!-- /.comment-list -->
 
 
-                                <!-- Modal edite-->
+                            <!-- Modal edite-->
                             <div style="margin-top: 100px" class="modal fade" id="exampleModalUpdateComment" tabindex="-1" role="dialog" aria-labelledby="exampleModaAddReplay" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
@@ -384,7 +384,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <p>Edit your comment *</p>
-                                            <form class="flat-contact-form" id="updateComment" method="post"  @submit.prevent="updateComment">
+                                            <form class="flat-contact-form" id="updateComment" @submit.prevent="updateComment">
                                                 <textarea v-validate="'required|min:2|max:255'" class="type-input" style="height: 150px;" placeholder="Comment*" name="comment" id="message-contact1" v-model="comment.comment"></textarea>
                                                 <div v-show="errors.has('comment')" class="invalid-feedback">
                                                     <i v-show="errors.has('comment')" class="fa fa-warning"></i>    
@@ -406,6 +406,7 @@
                                     </div>
                                 </div>
                             </div>
+
 
                             <!-- Modal delete-->
                             <div style="margin-top: 100px" class="modal fade bd-example-modal-xl" id="exampleModaDeleteComment" tabindex="-1" role="dialog" aria-labelledby="exampleModaAddReplay" aria-hidden="true">
@@ -429,12 +430,51 @@
                                 </div>
                             </div>
 
+
+                            <!-- Modal add comment Reply-->
+                            <div style="margin-top: 100px" class="modal fade" id="exampleModalAddCommentReply" tabindex="-1" role="dialog" aria-labelledby="exampleModaAddReplay" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalCenterTitle">Leave a comment Reply</h5>    
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Your email address will not be published. Required fields are marked *</p>
+                                            <form class="flat-contact-form"  @submit.prevent="addCommentReply" id="addCommentReply">
+                                                <textarea v-validate="'required|min:2|max:255'" class="type-input" style="height: 150px;" placeholder="Comment*" name="comment" v-model="commentReply.comment"></textarea>
+                                                <div v-show="errors.has('comment')" class="invalid-feedback">
+                                                    <i v-show="errors.has('comment')" class="fa fa-warning"></i>    
+                                                    @{{ errors.first('comment') }}
+                                                </div>
+                                                <button type="submit" class="flat-button" style="background-color: #ffaa30;">
+                                                Post Comment
+                                                </button>
+                                                <button class="flat-button" data-dismiss="modal" aria-label="Close" style="background-color: red;">
+                                                    Close
+                                                </button>
+                                                <div v-if="action" id="subscribe-msg" style="max-width: 100%; margin-top: 10px">
+                                                    <div class="alert alert-success" role="alert">
+                                                        <strong>your comment Reply is added</strong>
+                                                    </div>
+                                                </div> 
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
                             <!-- form add comment -->
                             <div id="formAddComment" class="comment-respond">
+                                <div v-if="action" id="subscribe-msg" style="height: 100%; margin-top: 10px">
+                                    <div class="alert alert-success" role="alert">
+                                        <strong>your comment is added</strong>
+                                    </div>
+                                </div> 
                                 <h4 class="title comment-title style1">Leave a comment</h4>
                                 <p>Your email address will not be published. Required fields are marked *</p>
 
-                                <form class="flat-contact-form" id="contactform6" method="post"  @submit.prevent="addComment">
+                                <form class="flat-contact-form" id="contactform6" @submit.prevent="addComment">
 
                                     <textarea v-validate="'required|min:2|max:255'" class="type-input" placeholder="Comment*" name="comment" id="message-contact1" v-model="comment.comment"></textarea>
                                     <div v-show="errors.has('comment')" class="invalid-feedback">
@@ -443,12 +483,6 @@
                                     </div>
 
                                     <button class="flat-button bg-orange" type="submit" >Post Comment</button>
-                                    <br>
-                                    <div v-if="action" id="subscribe-msg" style="width: 250px; margin-top: 10px">
-                                        <div class="alert alert-success" role="alert">
-                                            <strong>your comment is added</strong>
-                                        </div>
-                                    </div> 
                                 </form>
                             </div>
 

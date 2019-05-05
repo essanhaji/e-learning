@@ -13,14 +13,15 @@ var coursSingleComment = new Vue({
             user: window.Laravel.user,
             commentReplies: []
         },
-        comment_reply: {
+        commentReply: {
             id: 0,
-            user_id: 3,
+            user_id: window.Laravel.user.id,
             course_id: window.Laravel.course_id,
-            type: "",
+            type: window.Laravel.user.role.name,
             comment: "",
-            comment_id: ""
-        }
+            comment_id: 1,
+            user: window.Laravel.user,
+        },
     },
     methods: {
         // dateFormat:function(date){
@@ -116,11 +117,59 @@ var coursSingleComment = new Vue({
         .catch(error => {
             console.log('errors : ', error)
         })
-    }
     },
-    mounted: function() {
-        this.getComments();
-    }
+    addCommentReply: function() {
+        this.$validator.validateAll().then(result => {
+            console.log(this.commentReply);
+            if (result) {
+                console.log(this.commentReply);
+                // axios
+                //     .post(
+                //         window.Laravel.url +
+                //             "/courses/comments/addcomment/",
+                //         this.comment
+                //     )
+                //     .then(response => {
+                //         if (response.data.etat) {
+                //             this.action = true;
+                //             this.comments.unshift(response.data.comment);
+                //             this.comment = {
+                //                 id: 0,
+                //                 user_id: window.Laravel.user.id,
+                //                 course_id: window.Laravel.course_id,
+                //                 type: window.Laravel.user.role.name,
+                //                 comment: "Comment*",
+                //                 user: window.Laravel.user,
+                //                 commentReplies: []
+                //             };
+                //         }
+                //     })
+                //     .catch(error => {
+                //         console.log("errors : ", error);
+                //     });
+                return;
+            }
+            else alert("Correct them errors !!");
+        });
+    },
+    preperCommentReply:function(id){
+        this.action = false;
+        this.comment = {
+            id: 0,
+            user_id: window.Laravel.user.id,
+            course_id: window.Laravel.course_id,
+            type: window.Laravel.user.role.name,
+            comment: "",
+            comment_id: 0,
+            user: window.Laravel.user,
+        };
+        this.comment.comment_id = id;
+        console.log(this.comment);
+    },
+},
+mounted: function() {
+    this.getComments();
+}
 });
 
 // var coursSingleComment = new Vue({
