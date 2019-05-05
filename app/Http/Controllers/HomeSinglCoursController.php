@@ -137,4 +137,18 @@ class HomeSinglCoursController extends Controller
         }
         return Response()->json(['etat' => true, 'comment' => $comment]);
     }
+
+
+    public function deleteComment($id)
+    {
+        $comment = Comment::whereId($id)->first();
+
+        foreach ($comment->commentReplies as $commentReplie) {
+            $commentReplie->delete();
+        }
+
+        $comment->delete(); 
+
+        return Response()->json(['etat' => true]);
+    }
 }

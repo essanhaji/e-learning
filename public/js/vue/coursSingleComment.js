@@ -3,6 +3,7 @@ var coursSingleComment = new Vue({
     data: {
         comments: [],
         action: false,
+        actionDelete:false,
         comment: {
             id: 0,
             user_id: window.Laravel.user.id,
@@ -74,59 +75,48 @@ var coursSingleComment = new Vue({
                 alert("Correct them errors !!");
             });
         },
-        editComment:function(comment){
+        preperComment:function(comment){
             this.action = false;
             this.comment = comment;
         },
-            updateComment:function(){
-                this.$validator.validateAll().then(result => {
-                    if (result) {
-            axios.put(window.Laravel.url+'/courses/comments/updatecomment', this.comment)
-            .then(response => {
-                if(response.data.etat){
-                    this.action = true;
-                    this.comment = {
-                        id: 0,
-                        user_id: window.Laravel.user.id,
-                        course_id: window.Laravel.course_id,
-                        type: window.Laravel.user.role.name,
-                        comment: "Comment*",
-                        user: window.Laravel.user,
-                        commentReplies: []
-                    };
-                }
-            })
-            .catch(error => {
-                console.log('errors : ', error)
-            });
-            return;
-                }
-                alert("Correct them errors !!");
-            });
-        },
-        // preperExperience:function(experience){
-        //     this.experience = experience;
-        // },
-        // deleteExperience:function(){
-        //     axios.delete(window.Laravel.url+'/candidate/candidate-profile/deleteExperience/'+this.experience.id)
-        //     .then(response => {
-        //         if(response.data.etat){
-        //             this.experiences.splice(this.experiences.indexOf(this.experience), 1);
-        //             this.experience = {
-        //                 id:0,
-        //                 user_id:{{ Auth::user()->id }},
-        //                 start_date:"",
-        //                 end_date:"",
-        //                 title:"",
-        //                 speciality:"",
-        //                 description:""
-        //             }
-        //         }
-        //     })
-        //     .catch(error => {
-        //         console.log('errors : ', error)
-        //     })
-        // }
+        updateComment:function(){
+            this.$validator.validateAll().then(result => {
+                if (result) {
+        axios.put(window.Laravel.url+'/courses/comments/updatecomment', this.comment)
+        .then(response => {
+            if(response.data.etat){
+                this.action = true;
+            }
+        })
+        .catch(error => {
+            console.log('errors : ', error)
+        });
+        return;
+            }
+            alert("Correct them errors !!");
+        });
+    },
+    deleteComment:function(){
+        axios.delete(window.Laravel.url+'/courses/comments/deletecomment/'+this.comment.id)
+        .then(response => {
+            if(response.data.etat){
+                this.comments.splice(this.comments.indexOf(this.comment), 1);
+                this.actionDelete = true;
+                this.comment = {
+                    id: 0,
+                    user_id: window.Laravel.user.id,
+                    course_id: window.Laravel.course_id,
+                    type: window.Laravel.user.role.name,
+                    comment: "Comment*",
+                    user: window.Laravel.user,
+                    commentReplies: []
+                };
+            }
+        })
+        .catch(error => {
+            console.log('errors : ', error)
+        })
+    }
     },
     mounted: function() {
         this.getComments();

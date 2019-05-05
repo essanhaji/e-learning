@@ -311,14 +311,20 @@
                         <div class="comment-list-wrap">
                             <h4 class="title comment-title">Comments (@{{ comments.length }}) </h4>
                             <ul class="comment-list">
-
+                                <li> 
+                                    <div v-if="actionDelete" id="subscribe-msg" style="height: 100%; margin-top: 10px">
+                                        <div class="alert alert-success" role="alert">
+                                            <strong>your comment is delete</strong>
+                                        </div>
+                                    </div>
+                                </li>
                             
                                 
                                 <li v-for="comment in comments">
                                     <article class="comment">
                                         <div class="text-right">
-                                            <a type="button" data-toggle="modal" data-target="#exampleModaAddReplay"><i class="fa fa-trash-o"></i></a>
-                                            <a @click="editComment(comment)" type="button" data-toggle="modal" data-target="#exampleModalUpdateComment"><i class="fa fa-edit"></i></a>
+                                            <a @click="preperComment(comment)" type="button" data-toggle="modal" data-target="#exampleModaDeleteComment"><i class="fa fa-trash-o"></i></a>
+                                            <a @click="preperComment(comment)" type="button" data-toggle="modal" data-target="#exampleModalUpdateComment"><i class="fa fa-edit"></i></a>
                                         </div>
                                         <div class="comment-avatar thmub">
                                             <img style="border-radius: 90px;" :src="'{{ asset('storage/') }}/' + comment.user.avatar" width="90px" :alt="comment.user.name">
@@ -369,57 +375,68 @@
                             </ul><!-- /.comment-list -->
 
 
-                                <!-- Modal -->
+                                <!-- Modal edite-->
                             <div style="margin-top: 100px" class="modal fade" id="exampleModalUpdateComment" tabindex="-1" role="dialog" aria-labelledby="exampleModaAddReplay" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <div class="row">
-                                                <div class="col-md-10">
-                                                    <h5 class="modal-title" id="exampleModalCenterTitle">Send us your questions :</h5>
-                                                </div>
-                                                <div class="col-md-2 text-right">
-                                                    <a style="color: red;" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </a>
-                                                </div>
-                                            </div>
+                                            <h5 class="modal-title" id="exampleModalCenterTitle">Edit Your Comment </h5>    
                                         </div>
                                         <div class="modal-body">
-
-                                            <p>Your email address will not be published. Required fields are marked *</p>
+                                            <p>Edit your comment *</p>
                                             <form class="flat-contact-form" id="updateComment" method="post"  @submit.prevent="updateComment">
-
-                                                <textarea v-validate="'required|min:2|max:255'" class="type-input" tabindex="3" placeholder="Comment*" name="comment" id="message-contact1" v-model="comment.comment"></textarea>
+                                                <textarea v-validate="'required|min:2|max:255'" class="type-input" style="height: 150px;" placeholder="Comment*" name="comment" id="message-contact1" v-model="comment.comment"></textarea>
                                                 <div v-show="errors.has('comment')" class="invalid-feedback">
                                                     <i v-show="errors.has('comment')" class="fa fa-warning"></i>    
-                                                            @{{ errors.first('comment') }}
+                                                    @{{ errors.first('comment') }}
                                                 </div>
-
-                                                <button type="submit" class="flat-button bg-orange">Edit</button>
-                                                <button class="btn btn-danger bg-danger" data-dismiss="modal" aria-label="Close">
+                                                <button type="submit" class="flat-button" style="background-color: #ffaa30;">
+                                                    Edit
+                                                </button>
+                                                <button class="flat-button" data-dismiss="modal" aria-label="Close" style="background-color: red;">
                                                     Close
                                                 </button>
-                                                <div v-if="action" id="subscribe-msg" style="width: 250px; margin-top: 10px">
+                                                <div v-if="action" id="subscribe-msg" style="max-width: 100%; margin-top: 10px">
                                                     <div class="alert alert-success" role="alert">
                                                         <strong>your comment is updated</strong>
                                                     </div>
                                                 </div> 
-
                                             </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
+                            <!-- Modal delete-->
+                            <div style="margin-top: 100px" class="modal fade bd-example-modal-xl" id="exampleModaDeleteComment" tabindex="-1" role="dialog" aria-labelledby="exampleModaAddReplay" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalCenterTitle">Delete Comment</h5>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Are you sure that you wante to delete this comment *</p>
+                                            <form class="flat-contact-form" id="deleteComment">
+                                                <button @click="deleteComment" class="flat-button" style="background-color: red;" type="button" data-dismiss="modal" aria-label="Close">
+                                                    Delete
+                                                </button>
+                                                <button class="flat-button" style="background-color: #ffaa30;" data-dismiss="modal" aria-label="Close">
+                                                    Close
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
+                            <!-- form add comment -->
                             <div id="formAddComment" class="comment-respond">
                                 <h4 class="title comment-title style1">Leave a comment</h4>
                                 <p>Your email address will not be published. Required fields are marked *</p>
 
                                 <form class="flat-contact-form" id="contactform6" method="post"  @submit.prevent="addComment">
 
-                                    <textarea v-validate="'required|min:2|max:255'" class="type-input" tabindex="3" placeholder="Comment*" name="comment" id="message-contact1" v-model="comment.comment"></textarea>
+                                    <textarea v-validate="'required|min:2|max:255'" class="type-input" placeholder="Comment*" name="comment" id="message-contact1" v-model="comment.comment"></textarea>
                                     <div v-show="errors.has('comment')" class="invalid-feedback">
                                         <i v-show="errors.has('comment')" class="fa fa-warning"></i>    
                                                 @{{ errors.first('comment') }}
