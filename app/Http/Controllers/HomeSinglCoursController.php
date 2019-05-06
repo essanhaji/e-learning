@@ -24,6 +24,7 @@ use App\Contact;
 use App\CourseSession;
 use App\Comment;
 use App\User;
+use App\CommentReply;
 
 class HomeSinglCoursController extends Controller
 {
@@ -150,5 +151,22 @@ class HomeSinglCoursController extends Controller
         $comment->delete(); 
 
         return Response()->json(['etat' => true]);
+    }
+
+
+    public function addCommentReply(Request $request)
+    {
+        $commentReply = new CommentReply;
+        $commentReply->user_id = $request->input('user_id');
+        $commentReply->type = $request->input('type');
+        $commentReply->comment = $request->input('comment');
+        $commentReply->comment_id = $request->input('comment_id');
+
+        $commentReply->save();
+
+        $commentReply->user; 
+        $commentReply->comment; 
+
+        return Response()->json(['etat' => true, 'commentReply' => $commentReply]);
     }
 }

@@ -57,10 +57,13 @@ Route::get('courses/teacher/{slug}', 'HomeCoursesController@index3');
 #.... Cours single
 Route::get('courses/{slug}', 'HomeSinglCoursController@index');
 Route::post('courses/cours-single/addquestion', 'HomeSinglCoursController@addQuestion');
+// comments
 Route::get('courses/comments/getcomment/{id}', 'HomeSinglCoursController@getComment');
 Route::post('courses/comments/addcomment', 'HomeSinglCoursController@addComment');
 Route::put('courses/comments/updatecomment', 'HomeSinglCoursController@updateComment');
 Route::delete('courses/comments/deletecomment/{id}', 'HomeSinglCoursController@deleteComment');
+// comments replies
+Route::post('courses/comments/addcommentreply', 'HomeSinglCoursController@addCommentReply');
 
 
 

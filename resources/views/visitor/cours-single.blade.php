@@ -312,13 +312,26 @@
                             <h4 class="title comment-title">Comments (@{{ comments.length }}) </h4>
                             <ul class="comment-list">
                                 <li> 
-                                    <div v-if="actionDelete" id="subscribe-msg" style="height: 100%; margin-top: 10px">
+                                    <div v-if="action == 'deleteComment'" id="subscribe-msg" style="height: 100%; margin-top: 10px">
                                         <div class="alert alert-success" role="alert">
                                             <strong>your comment is delete</strong>
                                         </div>
                                     </div>
                                 </li>
-                            
+                                <li>
+                                    <div v-if="action == 'addCommentReply'" id="subscribe-msg" style="max-width: 100%; margin-top: 10px">
+                                        <div class="alert alert-success" role="alert">
+                                            <strong>your comment Reply is added</strong>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div v-if="action == 'updateComment'" id="subscribe-msg" style="max-width: 100%; margin-top: 10px">
+                                        <div class="alert alert-success" role="alert">
+                                            <strong>your comment is updated</strong>
+                                        </div>
+                                    </div>
+                                </li>
                                 
                                 <li v-for="comment in comments">
                                     <article class="comment">
@@ -395,12 +408,12 @@
                                                 </button>
                                                 <button class="flat-button" data-dismiss="modal" aria-label="Close" style="background-color: red;">
                                                     Close
-                                                </button>
-                                                <div v-if="action" id="subscribe-msg" style="max-width: 100%; margin-top: 10px">
+                                                </button> 
+                                                <div v-if="action == 'updateComment'" id="subscribe-msg" style="max-width: 100%; margin-top: 10px">
                                                     <div class="alert alert-success" role="alert">
                                                         <strong>your comment is updated</strong>
                                                     </div>
-                                                </div> 
+                                                </div>
                                             </form>
                                         </div>
                                     </div>
@@ -431,32 +444,35 @@
                             </div>
 
 
+
+
+
                             <!-- Modal add comment Reply-->
-                            <div style="margin-top: 100px" class="modal fade" id="exampleModalAddCommentReply" tabindex="-1" role="dialog" aria-labelledby="exampleModaAddReplay" aria-hidden="true">
+                            <div style="margin-top: 100px" class="modal fade" id="exampleModalAddCommentReply" tabindex="-1" role="dialog" aria-labelledby="exampleModalAddCommentReply" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalCenterTitle">Leave a comment Reply</h5>    
+                                            <h5 class="modal-title">Leave a comment Reply</h5>    
                                         </div>
                                         <div class="modal-body">
                                             <p>Your email address will not be published. Required fields are marked *</p>
-                                            <form class="flat-contact-form"  @submit.prevent="addCommentReply" id="addCommentReply">
-                                                <textarea v-validate="'required|min:2|max:255'" class="type-input" style="height: 150px;" placeholder="Comment*" name="comment" v-model="commentReply.comment"></textarea>
-                                                <div v-show="errors.has('comment')" class="invalid-feedback">
-                                                    <i v-show="errors.has('comment')" class="fa fa-warning"></i>    
-                                                    @{{ errors.first('comment') }}
-                                                </div>
+                                            <form class="flat-contact-form"  @submit.prevent="addCommentReply">
+                                                <textarea class="type-input" style="height: 150px;" placeholder="Comment*" v-model="commentReply.comment"></textarea>
+                                                <!-- <div v-show="errors.has('commentRep')" class="invalid-feedback">
+                                                    <i v-show="errors.has('commentRep')" class="fa fa-warning"></i>    
+                                                    @{{ errors.first('commentRep') }}
+                                                </div> -->
                                                 <button type="submit" class="flat-button" style="background-color: #ffaa30;">
                                                 Post Comment
                                                 </button>
                                                 <button class="flat-button" data-dismiss="modal" aria-label="Close" style="background-color: red;">
                                                     Close
-                                                </button>
-                                                <div v-if="action" id="subscribe-msg" style="max-width: 100%; margin-top: 10px">
+                                                </button> 
+                                                <div v-if="action == 'addCommentReply'" id="subscribe-msg" style="max-width: 100%; margin-top: 10px">
                                                     <div class="alert alert-success" role="alert">
                                                         <strong>your comment Reply is added</strong>
                                                     </div>
-                                                </div> 
+                                                </div>
                                             </form>
                                         </div>
                                     </div>
@@ -466,11 +482,12 @@
 
                             <!-- form add comment -->
                             <div id="formAddComment" class="comment-respond">
-                                <div v-if="action" id="subscribe-msg" style="height: 100%; margin-top: 10px">
+                                <div v-if="action == 'addComment'" id="subscribe-msg" style="height: 100%; margin-top: 10px">
                                     <div class="alert alert-success" role="alert">
                                         <strong>your comment is added</strong>
                                     </div>
                                 </div> 
+                                
                                 <h4 class="title comment-title style1">Leave a comment</h4>
                                 <p>Your email address will not be published. Required fields are marked *</p>
 
@@ -481,7 +498,6 @@
                                         <i v-show="errors.has('comment')" class="fa fa-warning"></i>    
                                                 @{{ errors.first('comment') }}
                                     </div>
-
                                     <button class="flat-button bg-orange" type="submit" >Post Comment</button>
                                 </form>
                             </div>
