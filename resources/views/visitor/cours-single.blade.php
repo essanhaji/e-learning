@@ -304,7 +304,8 @@
 
 
 
-                    <div class="comment-post" id="coursSingleComment">
+
+                    <div class="comment-post" id="courseSingleComment">
                         <div class="comment-list-wrap">
                             <h4 class="title comment-title">Comments (@{{ nbrComments() }}) </h4>
                             <ul class="comment-list">
@@ -349,18 +350,21 @@
 
                                         @auth
                                         <div class="text-right">
+                                        <h4>
                                             <a v-if="comment.user_id == '@auth {{ Auth::user()->id }} @endauth'" @click="preperComment(comment)" type="button" data-toggle="modal" data-target="#exampleModaDeleteComment"><i class="fa fa-trash-o"></i></a>
                                             <a v-if="comment.user_id == '@auth {{ Auth::user()->id }} @endauth'" @click="preperComment(comment)" type="button" data-toggle="modal" data-target="#exampleModalUpdateComment"><i class="fa fa-edit"></i></a>
+                                        </h4>
                                         </div>
                                         @endauth
+                                        
                                         <div class="comment-avatar thmub">
                                             <img style="border-radius: 90px;" :src="'{{ asset('storage/') }}/' + comment.user.avatar" width="90px" :alt="comment.user.name">
                                         </div>
                                         <div class="comment-detail">
                                             <div class="comment-meta">
                                                 <p class="comment-author"><a>@{{ comment.user.name }}</a></p>
-                                                <p v-if="comment.type.toUpperCase() == 'teacher'.toUpperCase()" class="comment-date">@{{ comment.created_at }} &nbsp;<span style="background-color: #ffaa30;" class="badge badge-warning">@{{ comment.type }}</span></p>
-                                                <p v-if="comment.type.toUpperCase() == 'student'.toUpperCase()" class="comment-date">@{{ comment.created_at }} &nbsp;<span class="badge badge-warning">@{{ comment.type }}</span></p>
+                                                <p v-if="comment.type.toUpperCase() == 'teacher'.toUpperCase()" class="comment-date">@{{ dateFormat(comment.created_at )}} &nbsp;<span style="background-color: #ffaa30;" class="badge badge-warning">@{{ comment.type }}</span></p>
+                                                <p v-if="comment.type.toUpperCase() == 'student'.toUpperCase()" class="comment-date">@{{ dateFormat(comment.created_at )}} &nbsp;<span class="badge badge-warning">@{{ comment.type }}</span></p>
                                             </div>
                                             <p class="comment-body">@{{ comment.comment }}</p>
                                             @auth
@@ -374,18 +378,20 @@
                                         <article class="comment style1 style1">
                                             @auth
                                             <div class="text-right">
+                                                <h5>
                                                 <a v-if="commentReplie.user_id == '@auth {{ Auth::user()->id }} @endauth'" @click="preperCommentReplyDelete(commentReplie)" type="button" data-toggle="modal" data-target="#exampleModaDeleteCommentReply"><i class="fa fa-trash-o"></i></a>
                                                 <a v-if="commentReplie.user_id == '@auth {{ Auth::user()->id }} @endauth'" @click="preperCommentReplyDelete(commentReplie)" type="button" data-toggle="modal" data-target="#exampleModalUpdateCommentReply"><i class="fa fa-edit"></i></a>
+                                                </h5>
                                             </div>
                                             @endauth
                                             <div class="comment-avatar thmub">
-                                                <img style="border-radius: 90px;" :src="'{{ asset('storage/') }}/' + commentReplie.user.avatar" width="90px" :alt="commentReplie.user.name">
+                                                <img style="border-radius: 90px;" :src="'{{ asset('storage/') }}/' + commentReplie.user.avatar" width="80px" :alt="commentReplie.user.name">
                                             </div>
                                             <div class="comment-detail">
                                                 <div class="comment-meta">
                                                     <p class="comment-author"><a>@{{ commentReplie.user.name }}</a></p>
-                                                    <p v-if="commentReplie.type.toUpperCase() == 'teacher'.toUpperCase()" class="comment-date">@{{ commentReplie.created_at }} &nbsp;<span style="background-color: #ffaa30;" class="badge badge-warning">@{{ commentReplie.type }}</span></p>
-                                                    <p v-if="commentReplie.type.toUpperCase() == 'student'.toUpperCase()" class="comment-date">@{{ commentReplie.created_at }} &nbsp;<span class="badge badge-warning">@{{ commentReplie.type }}</span></p>
+                                                    <p v-if="commentReplie.type.toUpperCase() == 'teacher'.toUpperCase()" class="comment-date">@{{ dateFormat(commentReplie.created_at )}} &nbsp;<span style="background-color: #ffaa30;" class="badge badge-warning">@{{ commentReplie.type }}</span></p>
+                                                    <p v-if="commentReplie.type.toUpperCase() == 'student'.toUpperCase()" class="comment-date">@{{ dateFormat(commentReplie.created_at )}} &nbsp;<span class="badge badge-warning">@{{ commentReplie.type }}</span></p>
                                                 </div>
                                                 <p class="comment-body">@{{ commentReplie.comment }}</p>
                                                 @auth
@@ -417,11 +423,11 @@
                                         </div>
                                         <div class="modal-body">
                                             <p>Edit your comment *</p>
-                                            <form class="flat-contact-form" id="updateComment" @submit.prevent="updateComment">
+                                            <form class="flat-contact-form" id="updateComment" @submit.prevent="updateComment('updateComment')" data-vv-scope="updateComment">
                                                 <textarea v-validate="'required|min:2|max:255'" class="type-input" style="height: 150px;" placeholder="Comment*" name="comment" id="message-contact1" v-model="comment.comment"></textarea>
-                                                <div v-show="errors.has('comment')" class="invalid-feedback">
-                                                    <i v-show="errors.has('comment')" class="fa fa-warning"></i>    
-                                                    @{{ errors.first('comment') }}
+                                                <div v-show="errors.has('updateComment.comment')" class="invalid-feedback">
+                                                    <i v-show="errors.has('updateComment.comment')" class="fa fa-warning"></i>    
+                                                    @{{ errors.first('updateComment.comment') }}
                                                 </div>
                                                 <button type="submit" class="flat-button" style="background-color: #ffaa30;">
                                                     Edit
@@ -493,11 +499,11 @@
                                 </div> 
                                 <h4 class="title comment-title style1">Leave a comment</h4>
                                 <p>Your email address will not be published. Required fields are marked *</p>
-                                <form class="flat-contact-form" @submit.prevent="addComment">
-                                    <textarea v-validate="'required|min:2|max:255'" class="type-input" placeholder="Comment*" name="comment.comment" v-model="comment.comment"></textarea>
-                                    <div v-show="errors.has('comment.comment')" class="invalid-feedback" style="color: red;">
-                                        <i v-show="errors.has('comment.comment')" class="fa fa-warning"></i>    
-                                        @{{ errors.first('comment.comment') }}
+                                <form class="flat-contact-form" @submit.prevent="addComment('addComment')" data-vv-scope="addComment">
+                                    <textarea v-validate="'required|min:2|max:255'" class="type-input" placeholder="Comment*" name="comment" v-model="comment.comment"></textarea>
+                                    <div v-show="errors.has('addComment.comment')" class="invalid-feedback" style="color: red;">
+                                        <i v-show="errors.has('addComment.comment')" class="fa fa-warning"></i>    
+                                        @{{ errors.first('addComment.comment') }}
                                         <br><br>
                                     </div>
                                     <button class="flat-button bg-orange" type="submit" >Post Comment</button>
@@ -513,12 +519,12 @@
                                         </div>
                                         <div class="modal-body">
                                             <p>Your email address will not be published. Required fields are marked **</p>
-                                            <form class="flat-contact-form" @submit.prevent="addCommentReply">
+                                            <form class="flat-contact-form" @submit.prevent="addCommentReply('addCommentReply')" data-vv-scope="addCommentReply">
 
-                                                <textarea name="commentReply.comment" v-model="commentReply.comment" v-validate="'required|min:2|max:255'" class="type-input" style="height: 150px;" placeholder="Comment*"></textarea>
-                                                <div v-show="errors.has('commentReply.comment')" class="invalid-feedback" style="color:red;">
-                                                    <i v-show="errors.has('commentReply.comment')" class="fa fa-warning"></i>    
-                                                    @{{ errors.first('commentReply.comment') }}
+                                                <textarea name="comment" v-model="commentReply.comment" v-validate="'required|min:2|max:255'" class="type-input" style="height: 150px;" placeholder="Comment*"></textarea>
+                                                <div v-show="errors.has('addCommentReply.comment')" class="invalid-feedback" style="color:red;">
+                                                    <i v-show="errors.has('addCommentReply.comment')" class="fa fa-warning"></i>    
+                                                    @{{ errors.first('addCommentReply.comment') }}
                                                     <br>
                                                     <br>
                                                 </div>
@@ -550,11 +556,11 @@
                                         </div>
                                         <div class="modal-body">
                                             <p>Edit your comment *</p>
-                                            <form class="flat-contact-form" id="updateComment" @submit.prevent="updateCommentReply">                                            
-                                                <textarea name="commentReply.comment" v-model="commentReply.comment" v-validate="'required|min:2|max:255'" class="type-input" style="height: 150px;" placeholder="Comment*"></textarea>
-                                                <div v-show="errors.has('commentReply.comment')" class="invalid-feedback" style="color:red;">
-                                                    <i v-show="errors.has('commentReply.comment')" class="fa fa-warning"></i>    
-                                                    @{{ errors.first('commentReply.comment') }}
+                                            <form class="flat-contact-form" id="updateComment" @submit.prevent="updateCommentReply('updateCommentReply')" data-vv-scope="updateCommentReply">                                            
+                                                <textarea name="comment" v-model="commentReply.comment" v-validate="'required|min:2|max:255'" class="type-input" style="height: 150px;" placeholder="Comment*"></textarea>
+                                                <div v-show="errors.has('updateCommentReply.comment')" class="invalid-feedback" style="color:red;">
+                                                    <i v-show="errors.has('updateCommentReply.comment')" class="fa fa-warning"></i>    
+                                                    @{{ errors.first('updateCommentReply.comment') }}
                                                     <br>
                                                     <br>
                                                 </div>

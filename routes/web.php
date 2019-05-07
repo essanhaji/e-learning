@@ -43,16 +43,19 @@ Route::group(['prefix' => 'admin'], function () {
 Auth::routes();
 Route::get('/userhaslogin', 'HomeController@userHasLogin');
 
+
 #.... index
 Route::get('/', 'HomeIndexController@index');
 Route::post('home/newsletter', 'HomeIndexController@newsletter');
 Route::post('home/footerFormContact', 'HomeIndexController@footerFormContact');
+
 
 #.... courses
 Route::post('courses', 'HomeCoursesController@index4');//search
 Route::get('courses', 'HomeCoursesController@index1');
 Route::get('courses/category/{slug}', 'HomeCoursesController@index2');
 Route::get('courses/teacher/{slug}', 'HomeCoursesController@index3');
+
 
 #.... Cours single
 Route::get('courses/{slug}', 'HomeSinglCoursController@index');
@@ -68,16 +71,26 @@ Route::delete('courses/comments/deletecommentreply/{id}', 'HomeSinglCoursControl
 Route::put('courses/comments/updatecommentreply', 'HomeSinglCoursController@updateCommentReply');
 
 
-
-
 #.... All teachers
 Route::get('teachers/{search?}/{key?}', 'HomeTeachersController@index');
+
 
 #.... teacher profile
 Route::get('teachers/{slug}', 'HomeTeacherProfileController@index');
 
+
 #.... single post
 Route::get('blog/{slug}', 'HomeSinglePoseController@index');
+// comments
+Route::get('post/comments/getcomment/{id}', 'HomeSinglePoseController@getComment');///==>
+Route::post('post/comments/addcomment', 'HomeSinglePoseController@addComment');
+Route::put('post/comments/updatecomment', 'HomeSinglePoseController@updateComment');
+Route::delete('post/comments/deletecomment/{id}', 'HomeSinglePoseController@deleteComment');
+// comments replies
+Route::post('post/comments/addcommentreply', 'HomeSinglePoseController@addCommentReply');
+Route::delete('post/comments/deletecommentreply/{id}', 'HomeSinglePoseController@deleteCommentReply');
+Route::put('post/comments/updatecommentreply', 'HomeSinglePoseController@updateCommentReply');
+
 
 #.... blog all posts
 Route::get('blog/{category?}/{slug?}', 'HomeBlogController@index');

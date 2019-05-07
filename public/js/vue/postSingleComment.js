@@ -1,5 +1,5 @@
-var courseSingleComment = new Vue({
-    el: "#courseSingleComment",
+var postSingleComment = new Vue({
+    el: "#postSingleComment",
     data: {
         comments: [],
         action: '',
@@ -8,7 +8,7 @@ var courseSingleComment = new Vue({
         comment: {
             id: 0,
             user_id: window.Laravel.user.id,
-            course_id: window.Laravel.course_id,
+            post_id: window.Laravel.post_id,
             type: window.Laravel.user.role.name,
             comment: "",
             user: window.Laravel.user,
@@ -45,8 +45,8 @@ var courseSingleComment = new Vue({
             axios
                 .get(
                     window.Laravel.url +
-                        "/courses/comments/getcomment/" +
-                        window.Laravel.course_id
+                        "/post/comments/getcomment/" +
+                        window.Laravel.post_id
                 )
                 .then(response => {
                     this.action = '';
@@ -63,17 +63,17 @@ var courseSingleComment = new Vue({
                     axios
                         .post(
                             window.Laravel.url +
-                                "/courses/comments/addcomment/",
+                                "/post/comments/addcomment/",
                             this.comment
                         )
                         .then(response => {
                             if (response.data.etat) {
                                 this.action = 'addComment';
-                                this.comments.push(response.data.comment);
+                                this.comments.unshift(response.data.comment);
                                 this.comment = {
                                     id: 0,
                                     user_id: window.Laravel.user.id,
-                                    courseid: window.Laravel.courseid,
+                                    post_id: window.Laravel.post_id,
                                     type: window.Laravel.user.role.name,
                                     comment: "Comment*",
                                     user: window.Laravel.user,
@@ -99,7 +99,7 @@ var courseSingleComment = new Vue({
             this.comment = {
                 id: 0,
                 user_id: window.Laravel.user.id,
-                courseid: window.Laravel.courseid,
+                post_id: window.Laravel.post_id,
                 type: window.Laravel.user.role.name,
                 comment: "Comment*",
                 user: window.Laravel.user,
@@ -113,7 +113,7 @@ var courseSingleComment = new Vue({
                     axios
                         .put(
                             window.Laravel.url +
-                                "/courses/comments/updatecomment",
+                                "/post/comments/updatecomment",
                             this.comment
                         )
                         .then(response => {
@@ -134,7 +134,7 @@ var courseSingleComment = new Vue({
             axios
                 .delete(
                     window.Laravel.url +
-                        "/courses/comments/deletecomment/" +
+                        "/post/comments/deletecomment/" +
                         this.comment.id
                 )
                 .then(response => {
@@ -147,7 +147,7 @@ var courseSingleComment = new Vue({
                         this.comment = {
                             id: 0,
                             user_id: window.Laravel.user.id,
-                            courseid: window.Laravel.courseid,
+                            post_id: window.Laravel.post_id,
                             type: window.Laravel.user.role.name,
                             comment: "Comment*",
                             user: window.Laravel.user,
@@ -166,7 +166,7 @@ var courseSingleComment = new Vue({
                 axios
                     .post(
                         window.Laravel.url +
-                            "/courses/comments/addcommentreply/",
+                            "/post/comments/addcommentreply/",
                         this.commentReply
                     )
                     .then(response => {
@@ -206,7 +206,7 @@ var courseSingleComment = new Vue({
                 axios
                     .put(
                         window.Laravel.url +
-                            "/courses/comments/updatecommentreply/",
+                            "/post/comments/updatecommentreply/",
                         this.commentReply
                     )
                     .then(response => {
@@ -245,7 +245,7 @@ var courseSingleComment = new Vue({
             axios
                 .delete(
                     window.Laravel.url +
-                        "/courses/comments/deletecommentreply/" +
+                        "/post/comments/deletecommentreply/" +
                         this.commentReply.id
                 )
                 .then(response => {

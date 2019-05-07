@@ -26,14 +26,6 @@
     <!-- Colors -->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/colors/color1.css') }}" id="colors">
 
-    <script type="text/javascript">
-        var user_id_loged = '0';
-        @auth
-            user_id_loged = '{{ Auth::user()->id }}';
-        @endauth
-        console.log(user_id_loged);
-    </script>
-
     <!-- Favicon and touch icons  -->
     <link href="{{ asset('icon/apple-touch-icon-48-precomposed.png') }}" rel="apple-touch-icon-precomposed" sizes="48x48">
     <link href="{{ asset('icon/apple-touch-icon-57-precomposed.png') }}" rel="apple-touch-icon-precomposed" sizes="57x57">
@@ -375,7 +367,8 @@
             'csrfToken' => csrf_token(),
             'url'       => url('/'),
             'course_id' => '',
-            'user' => '',
+            'post_id'   => '',
+            'user'      => '',
         ]) !!}
     </script>
 
