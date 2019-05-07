@@ -1,7 +1,6 @@
 @extends('visitor.layout')
 @section('content')
 
-
 <div class="page-title parallax parallax4">
     <div class="overlay"></div>
     <div class="container">
@@ -305,11 +304,9 @@
 
 
 
-
-
                     <div class="comment-post" id="coursSingleComment">
                         <div class="comment-list-wrap">
-                            <h4 class="title comment-title">Comments (@{{ comments.length }}) </h4>
+                            <h4 class="title comment-title">Comments (@{{ nbrComments() }}) </h4>
                             <ul class="comment-list">
                                 <li> 
                                     <div v-if="action == 'deleteComment'" id="subscribe-msg" style="height: 100%; margin-top: 10px">
@@ -332,13 +329,30 @@
                                         </div>
                                     </div>
                                 </li>
-                                
+                                <li>
+                                    <div v-if="action == 'deleteCommentReply'" id="subscribe-msg" style="max-width: 100%; margin-top: 10px">
+                                        <div class="alert alert-success" role="alert">
+                                            <strong>your comment is deleted</strong>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div v-if="action == 'updateCommentReply'" id="subscribe-msg" style="max-width: 100%; margin-top: 10px">
+                                        <div class="alert alert-success" role="alert">
+                                            <strong>your comment is updated</strong>
+                                        </div>
+                                    </div>                 
+                                </li>
+
                                 <li v-for="comment in comments">
                                     <article class="comment">
+
+                                        @auth
                                         <div class="text-right">
-                                            <a @click="preperComment(comment)" type="button" data-toggle="modal" data-target="#exampleModaDeleteComment"><i class="fa fa-trash-o"></i></a>
-                                            <a @click="preperComment(comment)" type="button" data-toggle="modal" data-target="#exampleModalUpdateComment"><i class="fa fa-edit"></i></a>
+                                            <a v-if="comment.user_id == '@auth {{ Auth::user()->id }} @endauth'" @click="preperComment(comment)" type="button" data-toggle="modal" data-target="#exampleModaDeleteComment"><i class="fa fa-trash-o"></i></a>
+                                            <a v-if="comment.user_id == '@auth {{ Auth::user()->id }} @endauth'" @click="preperComment(comment)" type="button" data-toggle="modal" data-target="#exampleModalUpdateComment"><i class="fa fa-edit"></i></a>
                                         </div>
+                                        @endauth
                                         <div class="comment-avatar thmub">
                                             <img style="border-radius: 90px;" :src="'{{ asset('storage/') }}/' + comment.user.avatar" width="90px" :alt="comment.user.name">
                                         </div>
@@ -349,51 +363,57 @@
                                                 <p v-if="comment.type.toUpperCase() == 'student'.toUpperCase()" class="comment-date">@{{ comment.created_at }} &nbsp;<span class="badge badge-warning">@{{ comment.type }}</span></p>
                                             </div>
                                             <p class="comment-body">@{{ comment.comment }}</p>
-                                            
+                                            @auth
                                             <a @click="preperCommentReply(comment.id)" type="button" data-toggle="modal" data-target="#exampleModalAddCommentReply" class="comment-reply">Reply</a>
+                                            @endauth
                                         </div><!-- /.comment-detail -->
                                     </article><!-- /.comment -->
 
-                                    <ul class="comment-list">
-
-
-                                    <li v-for="commentReplie in comment.comment_replies">
-                                    <article class="comment style1 style1">
-                                        <div class="text-right">
-                                            <a type="button" data-toggle="modal" data-target="#exampleModaAddReplay"><i class="fa fa-trash-o"></i></a>
-                                            <a type="button" data-toggle="modal" data-target="#exampleModaAddReplay"><i class="fa fa-edit"></i></a>
-                                        </div>
-                                        <div class="comment-avatar thmub">
-                                            <img style="border-radius: 90px;" :src="'{{ asset('storage/') }}/' + commentReplie.user.avatar" width="90px" :alt="commentReplie.user.name">
-                                        </div>
-                                        <div class="comment-detail">
-                                            <div class="comment-meta">
-                                                <p class="comment-author"><a>@{{ commentReplie.user.name }}</a></p>
-                                                <p v-if="commentReplie.type.toUpperCase() == 'teacher'.toUpperCase()" class="comment-date">@{{ commentReplie.created_at }} &nbsp;<span style="background-color: #ffaa30;" class="badge badge-warning">@{{ commentReplie.type }}</span></p>
-                                                <p v-if="commentReplie.type.toUpperCase() == 'student'.toUpperCase()" class="comment-date">@{{ commentReplie.created_at }} &nbsp;<span class="badge badge-warning">@{{ commentReplie.type }}</span></p>
+                                    <ul v-for="commentReplie in comment.comment_replies">
+                                        <li>
+                                        <article class="comment style1 style1">
+                                            @auth
+                                            <div class="text-right">
+                                                <a v-if="commentReplie.user_id == '@auth {{ Auth::user()->id }} @endauth'" @click="preperCommentReplyDelete(commentReplie)" type="button" data-toggle="modal" data-target="#exampleModaDeleteCommentReply"><i class="fa fa-trash-o"></i></a>
+                                                <a v-if="commentReplie.user_id == '@auth {{ Auth::user()->id }} @endauth'" @click="preperCommentReplyDelete(commentReplie)" type="button" data-toggle="modal" data-target="#exampleModalUpdateCommentReply"><i class="fa fa-edit"></i></a>
                                             </div>
-                                            <p class="comment-body">@{{ commentReplie.comment }}</p>
-                                            
-                                            <a @click="preperCommentReply(comment.id)" type="button" data-toggle="modal" data-target="#exampleModalAddCommentReply" class="comment-reply">Reply</a>
-                                        </div>
-                                    </article>
-
-
+                                            @endauth
+                                            <div class="comment-avatar thmub">
+                                                <img style="border-radius: 90px;" :src="'{{ asset('storage/') }}/' + commentReplie.user.avatar" width="90px" :alt="commentReplie.user.name">
+                                            </div>
+                                            <div class="comment-detail">
+                                                <div class="comment-meta">
+                                                    <p class="comment-author"><a>@{{ commentReplie.user.name }}</a></p>
+                                                    <p v-if="commentReplie.type.toUpperCase() == 'teacher'.toUpperCase()" class="comment-date">@{{ commentReplie.created_at }} &nbsp;<span style="background-color: #ffaa30;" class="badge badge-warning">@{{ commentReplie.type }}</span></p>
+                                                    <p v-if="commentReplie.type.toUpperCase() == 'student'.toUpperCase()" class="comment-date">@{{ commentReplie.created_at }} &nbsp;<span class="badge badge-warning">@{{ commentReplie.type }}</span></p>
+                                                </div>
+                                                <p class="comment-body">@{{ commentReplie.comment }}</p>
+                                                @auth
+                                                <a @click="preperCommentReply(comment.id)" type="button" data-toggle="modal" data-target="#exampleModalAddCommentReply" class="comment-reply">Reply</a>
+                                                @endauth
+                                            </div>
+                                        </article>
+                                        </li>         
                                     </ul>
-                                </li>
+                                </ul><!-- /.comment-list -->
 
 
 
-                                
-                            </ul><!-- /.comment-list -->
-
-
+                            @guest
+                                <div style="max-width: 100%; margin-top: 10px" title="Login">
+                                <a href="/login" class="bg-danger">
+                                    <div class="alert alert-danger" role="alert">
+                                        <strong>you have to identify to add a comment</strong>                                        
+                                    </div>
+                                    </a> 
+                                </div>
+                            @else
                             <!-- Modal edite-->
                             <div style="margin-top: 100px" class="modal fade" id="exampleModalUpdateComment" tabindex="-1" role="dialog" aria-labelledby="exampleModaAddReplay" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalCenterTitle">Edit Your Comment </h5>    
+                                            <h5 class="modal-title">Edit Your Comment </h5>    
                                         </div>
                                         <div class="modal-body">
                                             <p>Edit your comment *</p>
@@ -406,7 +426,7 @@
                                                 <button type="submit" class="flat-button" style="background-color: #ffaa30;">
                                                     Edit
                                                 </button>
-                                                <button class="flat-button" data-dismiss="modal" aria-label="Close" style="background-color: red;">
+                                                <button @click="notPreperComment" class="flat-button" data-dismiss="modal" aria-label="Close" style="background-color: red;">
                                                     Close
                                                 </button> 
                                                 <div v-if="action == 'updateComment'" id="subscribe-msg" style="max-width: 100%; margin-top: 10px">
@@ -420,13 +440,12 @@
                                 </div>
                             </div>
 
-
                             <!-- Modal delete-->
                             <div style="margin-top: 100px" class="modal fade bd-example-modal-xl" id="exampleModaDeleteComment" tabindex="-1" role="dialog" aria-labelledby="exampleModaAddReplay" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalCenterTitle">Delete Comment</h5>
+                                            <h5 class="modal-title">Delete Comment</h5>
                                         </div>
                                         <div class="modal-body">
                                             <p>Are you sure that you wante to delete this comment *</p>
@@ -442,12 +461,50 @@
                                     </div>
                                 </div>
                             </div>
+                       
+                            <!-- Modal delete-->
+                            <div style="margin-top: 100px" class="modal fade bd-example-modal-xl" id="exampleModaDeleteCommentReply" tabindex="-1" role="dialog" aria-labelledby="exampleModaAddReplay" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Delete Comment</h5>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Are you sure that you wante to delete this comment **</p>
+                                            <form class="flat-contact-form">
+                                                <button @click="deleteCommentReply" class="flat-button" style="background-color: red;" type="button" data-dismiss="modal" aria-label="Close">
+                                                    Delete
+                                                </button>
+                                                <button class="flat-button" style="background-color: #ffaa30;" data-dismiss="modal" aria-label="Close">
+                                                    Close
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
+                            <!-- form add comment -->
+                            <div  class="comment-respond">
+                                <div v-if="action == 'addComment'" style="height: 100%; margin-top: 10px">
+                                    <div class="alert alert-success" role="alert">
+                                        <strong>your comment is added</strong>
+                                    </div>
+                                </div> 
+                                <h4 class="title comment-title style1">Leave a comment</h4>
+                                <p>Your email address will not be published. Required fields are marked *</p>
+                                <form class="flat-contact-form" @submit.prevent="addComment">
+                                    <textarea v-validate="'required|min:2|max:255'" class="type-input" placeholder="Comment*" name="comment.comment" v-model="comment.comment"></textarea>
+                                    <div v-show="errors.has('comment.comment')" class="invalid-feedback" style="color: red;">
+                                        <i v-show="errors.has('comment.comment')" class="fa fa-warning"></i>    
+                                        @{{ errors.first('comment.comment') }}
+                                        <br><br>
+                                    </div>
+                                    <button class="flat-button bg-orange" type="submit" >Post Comment</button>
+                                </form>
+                            </div>
 
-
-
-
-                            <!-- Modal add comment Reply-->
+                            <!-- Modal add comment Reply -->
                             <div style="margin-top: 100px" class="modal fade" id="exampleModalAddCommentReply" tabindex="-1" role="dialog" aria-labelledby="exampleModalAddCommentReply" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
@@ -455,22 +512,61 @@
                                             <h5 class="modal-title">Leave a comment Reply</h5>    
                                         </div>
                                         <div class="modal-body">
-                                            <p>Your email address will not be published. Required fields are marked *</p>
-                                            <form class="flat-contact-form"  @submit.prevent="addCommentReply">
-                                                <textarea class="type-input" style="height: 150px;" placeholder="Comment*" v-model="commentReply.comment"></textarea>
-                                                <!-- <div v-show="errors.has('commentRep')" class="invalid-feedback">
-                                                    <i v-show="errors.has('commentRep')" class="fa fa-warning"></i>    
-                                                    @{{ errors.first('commentRep') }}
-                                                </div> -->
+                                            <p>Your email address will not be published. Required fields are marked **</p>
+                                            <form class="flat-contact-form" @submit.prevent="addCommentReply">
+
+                                                <textarea name="commentReply.comment" v-model="commentReply.comment" v-validate="'required|min:2|max:255'" class="type-input" style="height: 150px;" placeholder="Comment*"></textarea>
+                                                <div v-show="errors.has('commentReply.comment')" class="invalid-feedback" style="color:red;">
+                                                    <i v-show="errors.has('commentReply.comment')" class="fa fa-warning"></i>    
+                                                    @{{ errors.first('commentReply.comment') }}
+                                                    <br>
+                                                    <br>
+                                                </div>
+                                                
                                                 <button type="submit" class="flat-button" style="background-color: #ffaa30;">
                                                 Post Comment
                                                 </button>
                                                 <button class="flat-button" data-dismiss="modal" aria-label="Close" style="background-color: red;">
                                                     Close
                                                 </button> 
-                                                <div v-if="action == 'addCommentReply'" id="subscribe-msg" style="max-width: 100%; margin-top: 10px">
+                                                <div v-if="action == 'addCommentReply'" style="max-width: 100%; margin-top: 10px">
                                                     <div class="alert alert-success" role="alert">
                                                         <strong>your comment Reply is added</strong>
+                                                    </div>
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Modal edite reply comment-->
+                            <div style="margin-top: 100px" class="modal fade" id="exampleModalUpdateCommentReply" tabindex="-1" role="dialog" aria-labelledby="exampleModaAddReplay" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Edit Your Comment </h5>    
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Edit your comment *</p>
+                                            <form class="flat-contact-form" id="updateComment" @submit.prevent="updateCommentReply">                                            
+                                                <textarea name="commentReply.comment" v-model="commentReply.comment" v-validate="'required|min:2|max:255'" class="type-input" style="height: 150px;" placeholder="Comment*"></textarea>
+                                                <div v-show="errors.has('commentReply.comment')" class="invalid-feedback" style="color:red;">
+                                                    <i v-show="errors.has('commentReply.comment')" class="fa fa-warning"></i>    
+                                                    @{{ errors.first('commentReply.comment') }}
+                                                    <br>
+                                                    <br>
+                                                </div>
+                                                <button type="submit" class="flat-button" style="background-color: #ffaa30;">
+                                                Edit
+                                                </button>
+                                                <button class="flat-button" data-dismiss="modal" aria-label="Close" style="background-color: red;">
+                                                    Close
+                                                </button> 
+                                                <div v-if="action == 'updateCommentReply'" style="max-width: 100%; margin-top: 10px">
+                                                    <div class="alert alert-success" role="alert">
+                                                        <strong>your comment updated</strong>
                                                     </div>
                                                 </div>
                                             </form>
@@ -478,29 +574,7 @@
                                     </div>
                                 </div>
                             </div>
-
-
-                            <!-- form add comment -->
-                            <div id="formAddComment" class="comment-respond">
-                                <div v-if="action == 'addComment'" id="subscribe-msg" style="height: 100%; margin-top: 10px">
-                                    <div class="alert alert-success" role="alert">
-                                        <strong>your comment is added</strong>
-                                    </div>
-                                </div> 
-                                
-                                <h4 class="title comment-title style1">Leave a comment</h4>
-                                <p>Your email address will not be published. Required fields are marked *</p>
-
-                                <form class="flat-contact-form" id="contactform6" @submit.prevent="addComment">
-
-                                    <textarea v-validate="'required|min:2|max:255'" class="type-input" placeholder="Comment*" name="comment" id="message-contact1" v-model="comment.comment"></textarea>
-                                    <div v-show="errors.has('comment')" class="invalid-feedback">
-                                        <i v-show="errors.has('comment')" class="fa fa-warning"></i>    
-                                                @{{ errors.first('comment') }}
-                                    </div>
-                                    <button class="flat-button bg-orange" type="submit" >Post Comment</button>
-                                </form>
-                            </div>
+                            @endauth
 
                         </div><!-- /.comment-list-wrap -->
                     </div><!-- /.comment-post -->
@@ -603,6 +677,7 @@
 @section('js')
 <script>
     window.Laravel.course_id = '{{ $cours->id }}';
+
     @guest
         @php
             $cours->teacher->user->role;
@@ -615,9 +690,10 @@
                 Auth::user()->role;
             @endphp
             window.Laravel.user = {!!json_encode( Auth::user()) !!};
-            //console.log("==========>"+ window.Laravel.user.name);
         @endauth
-    @endguest
+    @endauth
+
+    
 </script>
 
 <script type="text/javascript" src="{{ asset('js/vue/coursSingleQuestion.js') }}"></script>

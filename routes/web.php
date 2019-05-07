@@ -64,6 +64,8 @@ Route::put('courses/comments/updatecomment', 'HomeSinglCoursController@updateCom
 Route::delete('courses/comments/deletecomment/{id}', 'HomeSinglCoursController@deleteComment');
 // comments replies
 Route::post('courses/comments/addcommentreply', 'HomeSinglCoursController@addCommentReply');
+Route::delete('courses/comments/deletecommentreply/{id}', 'HomeSinglCoursController@deleteCommentReply');
+Route::put('courses/comments/updatecommentreply', 'HomeSinglCoursController@updateCommentReply');
 
 
 

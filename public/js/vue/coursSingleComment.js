@@ -29,6 +29,13 @@ var coursSingleComment = new Vue({
         //     console.log(date);
         //     return dateFormat(date, "d, mm, y - h:MM:ss");
         // },
+        nbrComments: function(paams) {
+            let nbr = 0;
+            this.comments.forEach(element => {
+                nbr += element.comment_replies.length
+            });
+            return nbr + this.comments.length;
+        },
         getComments: function() {
             axios
                 .get(
@@ -47,6 +54,8 @@ var coursSingleComment = new Vue({
         addComment: function() {
             this.$validator.validateAll().then(result => {
                 if (result) {
+                    this.$validator.reset();
+
                     axios
                         .post(
                             window.Laravel.url +
@@ -56,7 +65,7 @@ var coursSingleComment = new Vue({
                         .then(response => {
                             if (response.data.etat) {
                                 this.action = 'addComment';
-                                this.comments.push(response.data.comment);
+                                this.comments.unshift(response.data.comment);
                                 this.comment = {
                                     id: 0,
                                     user_id: window.Laravel.user.id,
@@ -71,6 +80,7 @@ var coursSingleComment = new Vue({
                         .catch(error => {
                             console.log("errors : ", error);
                         });
+
                     return;
                 }
                 alert("Correct them errors !!");
@@ -80,9 +90,23 @@ var coursSingleComment = new Vue({
             this.action = '';
             this.comment = comment;
         },
+        notPreperComment: function() {
+            this.action = '';
+            this.comment = {
+                id: 0,
+                user_id: window.Laravel.user.id,
+                course_id: window.Laravel.course_id,
+                type: window.Laravel.user.role.name,
+                comment: "Comment*",
+                user: window.Laravel.user,
+                commentReplies: []
+            };
+        },
         updateComment: function() {
             this.$validator.validateAll().then(result => {
                 if (result) {
+                    this.$validator.reset();
+
                     axios
                         .put(
                             window.Laravel.url +
@@ -106,6 +130,7 @@ var coursSingleComment = new Vue({
                         .catch(error => {
                             console.log("errors : ", error);
                         });
+
                     return;
                 }
                 alert("Correct them errors !!");
@@ -142,6 +167,9 @@ var coursSingleComment = new Vue({
         },
         addCommentReply: function() {
             this.$validator.validateAll().then(result => {
+                if(result){
+                this.$validator.reset();
+
                 axios
                     .post(
                         window.Laravel.url +
@@ -151,7 +179,7 @@ var coursSingleComment = new Vue({
                     .then(response => {
                         if (response.data.etat) {
                             this.action = 'addCommentReply';
-                            reply = response.data.commentReply;
+                            var reply = response.data.commentReply;
                             this.comments.forEach(element => {
                                 if (element.id == reply.comment_id) {
                                     element.comment_replies.push(reply);
@@ -171,6 +199,47 @@ var coursSingleComment = new Vue({
                     .catch(error => {
                         console.log("errors : ", error);
                     });
+                    
+                    return;
+                } else{
+                    alert("Correct them errors !!");
+                }
+            });
+        },
+        updateCommentReply: function() {
+            this.$validator.validateAll().then(result => {
+                if(result){
+                this.$validator.reset();
+
+                axios
+                    .put(
+                        window.Laravel.url +
+                            "/courses/comments/updatecommentreply/",
+                        this.commentReply
+                    )
+                    .then(response => {
+                        if (response.data.etat) {
+                            this.action = 'updateCommentReply';
+                            var reply = this.commentReply;
+                            this.commentReply = {
+                                id: 0,
+                                user_id: window.Laravel.user.id,
+                                type: window.Laravel.user.role.name,
+                                comment: "Comment*",
+                                comment_id: 1,
+                                user: window.Laravel.user
+                            };
+                            this.commentReply.comment_id = reply.comment_id;
+                        }
+                    })
+                    .catch(error => {
+                        console.log("errors : ", error);
+                    });
+                    
+                    return;
+                } else{
+                    alert("Correct them errors !!");
+                }
             });
         },
         preperCommentReply: function(id) {
@@ -184,7 +253,64 @@ var coursSingleComment = new Vue({
                 user: window.Laravel.user
             };
             this.commentReply.comment_id = id;
-        }
+            this.comment = {
+                id: 0,
+                user_id: window.Laravel.user.id,
+                course_id: window.Laravel.course_id,
+                type: window.Laravel.user.role.name,
+                comment: "Comment*",
+                user: window.Laravel.user,
+                commentReplies: []
+            };
+        },
+        preperCommentReplyDelete: function(commentReplie){
+            this.commentReply = commentReplie;
+            this.action= "";
+            this.comment = {
+                id: 0,
+                user_id: window.Laravel.user.id,
+                course_id: window.Laravel.course_id,
+                type: window.Laravel.user.role.name,
+                comment: "Comment*",
+                user: window.Laravel.user,
+                commentReplies: []
+            };
+        },
+        deleteCommentReply: function() {
+            axios
+                .delete(
+                    window.Laravel.url +
+                        "/courses/comments/deletecommentreply/" +
+                        this.commentReply.id
+                )
+                .then(response => {
+                    if (response.data.etat) {
+                        var reply = this.commentReply;
+                        this.comments.forEach(element => {
+                            if (element.id == reply.comment_id) {
+                                element.comment_replies.splice(
+                                    element.comment_replies.indexOf(this.commentReply),
+                                    1
+                                );
+                                this.action= "deleteCommentReply";
+                            }
+                        });
+                        this.action = 'deleteComment';
+                        this.comment = {
+                            id: 0,
+                            user_id: window.Laravel.user.id,
+                            course_id: window.Laravel.course_id,
+                            type: window.Laravel.user.role.name,
+                            comment: "Comment*",
+                            user: window.Laravel.user,
+                            commentReplies: []
+                        };
+                    }
+                })
+                .catch(error => {
+                    console.log("errors : ", error);
+                });
+        },
     },
     mounted: function() {
         this.getComments();

@@ -169,4 +169,23 @@ class HomeSinglCoursController extends Controller
 
         return Response()->json(['etat' => true, 'commentReply' => $commentReply]);
     }
+
+    public function deleteCommentReply($id)
+    {
+        $commentReply = CommentReply::whereId($id)->first();
+
+        $commentReply->delete(); 
+
+        return Response()->json(['etat' => true]);
+    }
+
+    public function updateCommentReply(Request $request)
+    {
+        $commentReply = CommentReply::whereId($request->input('id'))->first();
+        $commentReply->comment = $request->input('comment');
+
+        $commentReply->save();
+
+        return Response()->json(['etat' => true]);
+    }
 }
