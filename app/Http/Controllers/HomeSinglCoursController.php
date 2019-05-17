@@ -30,7 +30,6 @@ class HomeSinglCoursController extends Controller
 {
     public function index($slug)
     {
-
         $categoryIdActive = '';
         $priceActive = '';
 

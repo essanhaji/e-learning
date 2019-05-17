@@ -42,6 +42,11 @@ Route::group(['prefix' => 'admin'], function () {
 
 Auth::routes();
 Route::get('/userhaslogin', 'HomeController@userHasLogin');
+// consulter les roles
+
+
+#.... aboute us
+Route::get('/about-us', 'AboutAsController@index');
 
 
 #.... index
@@ -94,5 +99,7 @@ Route::put('post/comments/updatecommentreply', 'HomeSinglePoseController@updateC
 
 #.... blog all posts
 Route::get('blog/{category?}/{slug?}', 'HomeBlogController@index');
+
+
 
 
