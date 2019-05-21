@@ -105,5 +105,11 @@ Route::put('post/comments/updatecommentreply', 'HomeSinglePoseController@updateC
 Route::get('blog/{category?}/{slug?}', 'HomeBlogController@index');
 
 
+#.... Contact
+Route::get('contact', 'HomeContactController@index');
+Route::post('contact-us', 'HomeContactController@addContact');
+
+
+
 
 

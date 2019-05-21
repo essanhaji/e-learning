@@ -68,7 +68,7 @@ class HomeIndexController extends Controller
         $contact = new Contact();
 
         $contact->email = $request->input('email');
-        $contact->message = $request->input('message');
+        $contact->content = $request->input('message');
 
         $contact->save();
 
