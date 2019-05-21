@@ -11,7 +11,6 @@
 |
 */
 
-Route::get('home', 'HomeController@index')->middleware('auth');
 
 
 //----------------------------------->>>>>> Student
@@ -40,9 +39,14 @@ Route::group(['prefix' => 'admin'], function () {
 //----------------------------------->>>>>> Home
 ///////////////////////////////////////////////////
 
+
+#.... Authentification
+Route::get('login', 'HomeControllerAuth@login');
+Route::get('register', 'HomeControllerAuth@register');
 Auth::routes();
-Route::get('/userhaslogin', 'HomeController@userHasLogin');
 // consulter les roles
+Route::get('/userhaslogin', 'HomeController@userHasLogin');
+Route::get('home', 'HomeController@index')->middleware('auth');
 
 
 #.... aboute us

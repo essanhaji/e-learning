@@ -1,1 +1,0 @@
-@auth v-if=" == window.Laravel.user.id" @endauth
