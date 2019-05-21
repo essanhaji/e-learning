@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Role;
+use App\TeacherProfile;
 
 class RegisterController extends Controller
 {
@@ -67,11 +68,21 @@ class RegisterController extends Controller
     {
         $role = Role::whereName($data['role_id'])->first();
 
-        return User::create([
+        $user = User::create([
             'role_id' => $role->id,
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+        if($data['role_id'] == 'teacher'){
+            $teacherProfile = new TeacherProfile();
+            $teacherProfile->user_id = $user->id;
+            $teacherProfile->slug = str_slug($data['name'], '-');
+            $teacherProfile->category_id = 1;
+            $teacherProfile->save();
+        }
+
+        return $user;
     }
 }

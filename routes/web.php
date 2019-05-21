@@ -49,9 +49,10 @@ Route::get('/userhaslogin', 'HomeController@userHasLogin');
 Route::get('home', 'HomeController@index')->middleware('auth');
 
 
-#.... aboute us
+#.... about us
 Route::get('/about-us', 'AboutAsController@index');
-
+Route::get('faqs', 'AboutAsController@index');
+Route::get('events', 'AboutAsController@index');
 
 #.... index
 Route::get('/', 'HomeIndexController@index');
@@ -108,6 +109,7 @@ Route::get('blog/{category?}/{slug?}', 'HomeBlogController@index');
 #.... Contact
 Route::get('contact', 'HomeContactController@index');
 Route::post('contact-us', 'HomeContactController@addContact');
+
 
 
 

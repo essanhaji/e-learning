@@ -25,6 +25,8 @@ use App\CourseSession;
 use App\Comment;
 use App\User;
 use App\CommentReply;
+use App\Faq;
+use App\Role;
 
 class AboutAsController extends Controller
 {
@@ -33,13 +35,18 @@ class AboutAsController extends Controller
         $lastPostsFooter = Post::whereStatus('PUBLISHED')->orderBy('updated_at', 'desc')->limit(2)->get();
         $coursTows = Course::orderBy('updated_at', 'desc')->limit(2)->get();
         $bestPriceCourses = Course::orderBy('price', 'desc')->limit(6)->get();
-        $nbrTeachers = TeacherProfile::All()->count();
+        $role = Role::whereName('teacher')->first();
+        $nbrTeachers = User::whereRole_id($role->id)->count();
+        $faqs = Faq::all();
+        $nbrCourses = Course::all()->count();
 
         return view('visitor.about-us', compact(
             'lastPostsFooter',
             'coursTows',
             'bestPriceCourses',
-            'nbrTeachers'
+            'nbrTeachers',
+            'faqs',
+            'nbrCourses'
         ));
     }
 }

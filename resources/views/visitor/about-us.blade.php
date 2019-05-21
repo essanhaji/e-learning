@@ -50,7 +50,7 @@
                                             </ul>  
                                         </div><!-- /.text-tab --> 
                                         <div class="images-tab">
-                                            <img src="{{ asset('images/services/1.jpg') }}" alt="images">
+                                            <img src="{{ asset('images/services/1999.jpg') }}" alt="images">
                                         </div>
                                     </div><!-- /.content-inner -->
                                     <div class="content-inner">
@@ -72,7 +72,7 @@
                                             </ul>  
                                         </div><!-- /.text-tab --> 
                                         <div class="images-tab">
-                                            <img src="{{ asset('images/services/1.jpg') }}" alt="images">
+                                            <img src="{{ asset('images/services/2001.jpg') }}" alt="images">
                                         </div>
                                     </div><!-- /.content-inner -->
                                     <div class="content-inner">
@@ -94,7 +94,7 @@
                                             </ul>  
                                         </div><!-- /.text-tab --> 
                                         <div class="images-tab">
-                                            <img src="{{ asset('images/services/1.jpg') }}" alt="images">
+                                            <img src="{{ asset('images/services/2005.jpg') }}" alt="images">
                                         </div>
                                     </div><!-- /.content-inner -->
                                     <div class="content-inner">
@@ -116,7 +116,7 @@
                                             </ul>  
                                         </div><!-- /.text-tab --> 
                                         <div class="images-tab">
-                                            <img src="{{ asset('images/services/1.jpg') }}" alt="images">
+                                            <img src="{{ asset('images/services/2011.jpg') }}" alt="images">
                                         </div>
                                     </div><!-- /.content-inner -->
                                     <div class="content-inner">
@@ -138,7 +138,7 @@
                                             </ul>  
                                         </div><!-- /.text-tab --> 
                                         <div class="images-tab">
-                                            <img src="{{ asset('images/services/1.jpg') }}" alt="images">
+                                            <img src="{{ asset('images/services/now.jpg') }}" alt="images">
                                         </div>
                                     </div><!-- /.content-inner -->
                                     
@@ -178,7 +178,7 @@
                             <div class="col-md-3 col-sm-6">
                                 <div class="flat-counter">                            
                                     <div class="counter-content">
-                                        <div class="numb-count" data-to="15" data-speed="2000" data-waypoint-active="yes">15</div>
+                                        <div class="numb-count" data-to="{{ $nbrCourses }}" data-speed="2000" data-waypoint-active="yes">15</div>
                                         <div class="name-count">Professional Awards</div>
                                         <div class="desc-count">Lorem ipsum dolor sit amet consecte tur adipiscing elit, sed do eiusmod tempor incididunt labore</div>
                                     </div>
@@ -208,37 +208,18 @@
                     <div class="row">
                         <div class="col-md-6">
                         <div class="flat-accordion">
+                            @foreach($faqs as $faq)
+
                             <div class="flat-toggle">
-                                <h6 class="toggle-title">Why Our School?</h6>
+                                <h6 class="toggle-title">{{ $faq->title }}</h6>
                                 <div class="toggle-content">
-                                    <div>Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                    Lorem ipsum dolor sit amet, consectetur adipi scing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud.</div>                               
+                                    <div>
+                                    {{ $faq->content }}
+                                    </div>
                                 </div>
                             </div><!-- /toggle -->
 
-                            <div class="flat-toggle">
-                                <h6 class="toggle-title active">Qualified Experts</h6>
-                                <div class="toggle-content" >
-                                    <div><p>Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                        <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipi scing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud.</p>
-                                    </div>                               
-                                </div>
-                            </div><!-- /toggle -->
-
-                            <div class="flat-toggle">
-                                <h6 class="toggle-title">Quick Access to The Patient</h6>
-                                <div class="toggle-content">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>                               
-                                </div>
-                            </div><!-- /toggle -->
-
-                            <div class="flat-toggle">
-                                <h6 class="toggle-title">How can an architect save you money on your home design?</h6>
-                                <div class="toggle-content">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>                               
-                                </div>
-                            </div><!-- /toggle -->
+                            @endforeach
                         </div><!-- /.flat-accordion -->
                         </div><!-- / .col-md-6 -->
 
