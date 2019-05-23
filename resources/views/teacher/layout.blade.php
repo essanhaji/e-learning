@@ -29,6 +29,14 @@
     <link href="{{ asset('teacherStyles/css/style.css') }}" rel="stylesheet">
     <!-- color CSS -->
     <link href="{{ asset('teacherStyles/css/colors/blue-dark.css') }}" id="theme" rel="stylesheet">
+    <!-- switchery -->
+    <link href="{{ asset('teacherStyles/plugins/bower_components/switchery/dist/switchery.min.css') }}" rel="stylesheet" type="text/css"/>
+
+    <!-- hadik yih     -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.js"></script>
+    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -189,6 +197,7 @@
     <script src="{{ asset('teacherStyles/plugins/bower_components/moment/moment.js') }}"></script>
     <script src="{{ asset('teacherStyles/plugins/bower_components/calendar/dist/fullcalendar.min.js') }}"></script>
     <script src="{{ asset('teacherStyles/plugins/bower_components/calendar/dist/cal-init.js') }}"></script>
+
     <!-- Custom Theme JavaScript -->
     <script src="{{ asset('teacherStyles/js/custom.min.js') }}"></script>
     <!-- <script src="{{ asset('teacherStyles/js/dashboard1.js') }}"></script> -->
@@ -201,10 +210,14 @@
             });
         })();
     </script>
+    <script src="{{ asset('teacherStyles/plugins/bower_components/switchery/dist/switchery.min.js') }}" type="text/javascript"></script>
+
+
     <!-- <script src="{{ asset('teacherStyles/plugins/bower_components/toast-master/js/jquery.toast.js"></script> -->
     <!--Style Switcher -->
     <!-- <script src="{{ asset('teacherStyles/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script> -->
     @yield('js')
+
 </body>
 
 </html>

@@ -118,6 +118,8 @@
             </div>
             
         </div>
+
+        
         <!-- ============================================================== -->
         <!-- wallet, & manage users widgets -->
         <!-- ============================================================== -->
@@ -129,9 +131,9 @@
                     <div class="sttabs tabs-style-iconbox">
                         <nav>
                             <ul>
-                                <li><a href="#section-iconbox-1" class="sticon ti-user"><span>Select Users</span></a></li>
-                                <li><a href="#section-iconbox-2" class="sticon ti-lock"><span>Set Permissions</span></a></li>
-                                <li><a href="#section-iconbox-3" class="sticon ti-receipt"><span>Message Users</span></a></li>
+                                <li><a href="#section-iconbox-1" class="sticon ti-wallet"><span>Courses</span></a></li>
+                                <li><a href="#section-iconbox-2" class="sticon ti-clipboard"><span>Set Permissions</span></a></li>
+                                <li><a href="#section-iconbox-3" class="sticon ti-user"><span>Message Users</span></a></li>
                                 <li><a href="#section-iconbox-4" class="sticon ti-check-box"><span>Save and finish</span></a></li>
                             </ul>
                         </nav>
@@ -139,13 +141,13 @@
                             <section id="section-iconbox-1">
                                 <div class="p-20 row">
                                     <div class="col-sm-6">
-                                        <h3 class="m-t-0">Select Users to Manage</h3>
+                                        <h3 class="m-t-0">My Courses</h3>
                                     </div>
                                     <div class="col-sm-6">
                                         <ul class="side-icon-text pull-right">
-                                            <li><a href="#"><span class="circle circle-sm bg-success di"><i class="ti-plus"></i></span><span>Add Users</span></a></li>
-                                            <li><a href="#"><span class="circle circle-sm bg-danger di"><i class="ti-pencil-alt"></i></span><span>Edit</span></a></li>
+                                            <li><a data-toggle="modal" data-target=".modalAddCourse"><span class="circle circle-sm bg-success di"><i class="ti-plus"></i></span><span>Add Course</span></a></li>
                                         </ul>
+                                        @include('teacher.modalAddCourse')
                                     </div>
                                 </div>
                                 <div class="table-responsive manage-table">
@@ -153,167 +155,70 @@
                                 <div class="row">
                                     <div class="col-md-12 col-lg-12 col-sm-12">
                                         <div class="panel">
-                                            <div class="panel-heading">MANAGE USERS</div>
                                             <div class="table-responsive">
                                                 <table class="table table-hover manage-u-table">
                                                     <thead>
                                                         <tr>
                                                             <th style="width: 70px;" class="text-center">#</th>
-                                                            <th>NAME</th>
-                                                            <th>OCCUPATION</th>
-                                                            <th>EMAIL</th>
-                                                            <th>CATEGORY</th>
-                                                            <th>MANAGE</th>
+                                                            <th>TITLE/TAG</th>
+                                                            <th>PRICE/LOCATION</th>
+                                                            <th>LEVEL/DURATION</th>
+                                                            <th>IMAGE</th>
+                                                            <th>LANGUAGE/CATEGORY</th>
+                                                            <th>ACTION</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
+                                                        @foreach($myCourses as $myCourse)
                                                         <tr>
-                                                            <td class="text-center">1</td>
-                                                            <td><span class="font-medium">Daniel Kristeen</span>
-                                                                <br><span class="text-muted">Texas, Unitedd states</span></td>
-                                                            <td>Visual Designer
-                                                                <br><span class="text-muted">Past : teacher</span></td>
-                                                            <td>daniel@website.com
-                                                                <br><span class="text-muted">999 - 444 - 555</span></td>
+                                                            <td class="text-center">{{ $myCourse->id }}</td>
+
                                                             <td>
-                                                                <select class="form-control">
-                                                                    <option>Modulator</option>
-                                                                    <option>Admin</option>
-                                                                    <option>User</option>
-                                                                    <option>Subscriber</option>
-                                                                </select>
+                                                                <span class="font-medium">{{ $myCourse->title }}</span>
+                                                                <br><span class="text-muted">{{ $myCourse->tag }}</span>
                                                             </td>
+
                                                             <td>
-                                                                <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="icon-trash"></i></button>
-                                                                <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-pencil-alt"></i></button>
+                                                                @if($myCourse->price == 0)
+                                                                    <span class="badge badge-warning">Free</span>
+                                                                @else
+                                                                <span class="badge badge-primary" style="background-color: #2cabe3 !important">{{ $myCourse->price }} DH</span>
+                                                                @endif
+                                                                <br>
+                                                                <span class="text-muted">{{ $myCourse->location }}</span>
+                                                            </td>
+
+                                                            <td>
+                                                                {{ $myCourse->level }}
+                                                                <br>
+                                                                <span class="text-muted">{{ $myCourse->duration }} Hour</span>
+                                                            </td>
+
+                                                            <td>
+                                                                <img src="{{ asset('storage/'.$myCourse->image ) }}" alt="{{ $myCourse->title }}" width="70px">
+                                                            </td>
+
+                                                            <td>
+                                                                {{ $myCourse->language }}
+                                                                <br>
+                                                                <span class="text-muted">{{ $myCourse->category->name }}</span>
+                                                            </td>
+
+                                                            <td>
+                                                                <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5">
+                                                                    <i class="icon-trash"></i>
+                                                                </button>
+                                                                <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5">
+                                                                    <i class="ti-plus"></i>
+                                                                </button>
+                                                                <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5">
+                                                                    <i class="ti-pencil-alt"></i>
+                                                                </button>
+                                                                
                                                             </td>
                                                         </tr>
-                                                        <tr>
-                                                            <td class="text-center">2</td>
-                                                            <td><span class="font-medium">Daniel Kristeen</span>
-                                                                <br><span class="text-muted">Texas, Unitedd states</span></td>
-                                                            <td>Visual Designer
-                                                                <br><span class="text-muted">Past : teacher</span></td>
-                                                            <td>daniel@website.com
-                                                                <br><span class="text-muted">999 - 444 - 555</span></td>
-                                                            <td>
-                                                                <select class="form-control">
-                                                                    <option>Modulator</option>
-                                                                    <option>Admin</option>
-                                                                    <option>User</option>
-                                                                    <option>Subscriber</option>
-                                                                </select>
-                                                            </td>
-                                                            <td>
-                                                                <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="icon-trash"></i></button>
-                                                                <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-pencil-alt"></i></button>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-center">3</td>
-                                                            <td><span class="font-medium">Daniel Kristeen</span>
-                                                                <br><span class="text-muted">Texas, Unitedd states</span></td>
-                                                            <td>Visual Designer
-                                                                <br><span class="text-muted">Past : teacher</span></td>
-                                                            <td>daniel@website.com
-                                                                <br><span class="text-muted">999 - 444 - 555</span></td>
-                                                            <td>
-                                                                <select class="form-control">
-                                                                    <option>Modulator</option>
-                                                                    <option>Admin</option>
-                                                                    <option>User</option>
-                                                                    <option>Subscriber</option>
-                                                                </select>
-                                                            </td>
-                                                            <td>
-                                                                <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="icon-trash"></i></button>
-                                                                <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-pencil-alt"></i></button>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-center">4</td>
-                                                            <td><span class="font-medium">Daniel Kristeen</span>
-                                                                <br><span class="text-muted">Texas, Unitedd states</span></td>
-                                                            <td>Visual Designer
-                                                                <br><span class="text-muted">Past : teacher</span></td>
-                                                            <td>daniel@website.com
-                                                                <br><span class="text-muted">999 - 444 - 555</span></td>
-                                                            <td>
-                                                                <select class="form-control">
-                                                                    <option>Modulator</option>
-                                                                    <option>Admin</option>
-                                                                    <option>User</option>
-                                                                    <option>Subscriber</option>
-                                                                </select>
-                                                            </td>
-                                                            <td>
-                                                                <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="icon-trash"></i></button>
-                                                                <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-pencil-alt"></i></button>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-center">5</td>
-                                                            <td><span class="font-medium">Daniel Kristeen</span>
-                                                                <br><span class="text-muted">Texas, Unitedd states</span></td>
-                                                            <td>Visual Designer
-                                                                <br><span class="text-muted">Past : teacher</span></td>
-                                                            <td>daniel@website.com
-                                                                <br><span class="text-muted">999 - 444 - 555</span></td>
-                                                            <td>
-                                                                <select class="form-control">
-                                                                    <option>Modulator</option>
-                                                                    <option>Admin</option>
-                                                                    <option>User</option>
-                                                                    <option>Subscriber</option>
-                                                                </select>
-                                                            </td>
-                                                            <td>
-                                                                <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="icon-trash"></i></button>
-                                                                <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-pencil-alt"></i></button>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-center">6</td>
-                                                            <td><span class="font-medium">Daniel Kristeen</span>
-                                                                <br><span class="text-muted">Texas, Unitedd states</span></td>
-                                                            <td>Visual Designer
-                                                                <br><span class="text-muted">Past : teacher</span></td>
-                                                            <td>daniel@website.com
-                                                                <br><span class="text-muted">999 - 444 - 555</span></td>
-                                                            <td>
-                                                                <select class="form-control">
-                                                                    <option>Modulator</option>
-                                                                    <option>Admin</option>
-                                                                    <option>User</option>
-                                                                    <option>Subscriber</option>
-                                                                </select>
-                                                            </td>
-                                                            <td>
-                                                                <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="icon-trash"></i></button>
-                                                                <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-pencil-alt"></i></button>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-center">7</td>
-                                                            <td><span class="font-medium">Daniel Kristeen</span>
-                                                                <br><span class="text-muted">Texas, Unitedd states</span></td>
-                                                            <td>Visual Designer
-                                                                <br><span class="text-muted">Past : teacher</span></td>
-                                                            <td>daniel@website.com
-                                                                <br><span class="text-muted">999 - 444 - 555</span></td>
-                                                            <td>
-                                                                <select class="form-control">
-                                                                    <option>Modulator</option>
-                                                                    <option>Admin</option>
-                                                                    <option>User</option>
-                                                                    <option>Subscriber</option>
-                                                                </select>
-                                                            </td>
-                                                            <td>
-                                                                <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="icon-trash"></i></button>
-                                                                <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-pencil-alt"></i></button>
-                                                            </td>
-                                                        </tr>
+                                                        @endforeach
+
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -467,6 +372,13 @@
             <!-- END MODAL -->
         </div>
 
+        <script>
+                $('#summernote').summernote({
+                    placeholder: 'Description of the course ...',
+                    tabsize: 2,
+                    height: 200
+                });
+        </script>
         @endsection
 
         @section('js')
@@ -503,4 +415,5 @@
             });
 
             </script>
+
         @endsection

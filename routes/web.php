@@ -26,6 +26,7 @@ Route::get('/student', 'HomeController@indexStudent');
 //----------------------------------->>>>>> Teacher
 ///////////////////////////////////////////////////
 Route::get('/teacher', 'TeacherDashboardController@index');
+Route::post('/teacher_insert_course', 'TeacherDashboardController@storeCourse');
 
 
 

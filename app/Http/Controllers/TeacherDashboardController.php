@@ -5,14 +5,25 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-use App\Course;
 use Auth;
+use DateTime;
+use App\Course;
 use App\Session;
 use App\Post;
 use App\Comment;
 use App\CommentReply;
-use DateTime;
 use App\User;
+use App\CourseRate;
+use App\Student;
+use App\StudentSay;
+use App\TeacherProfile;
+use App\Question;
+use App\CourseFaq;
+use App\CourseItem;
+use App\Category;
+use App\Sponsor;
+use App\Subscribe;
+use App\Contact;
 
 class TeacherDashboardController extends Controller
 {
@@ -25,6 +36,35 @@ class TeacherDashboardController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    public function storeCourse(Request $request)
+    {
+        $course = new Course();
+
+        $course->title = $request->input('title');
+        $course->price = $request->input('price');
+        $course->duration = $request->input('duration');
+        $course->language = $request->input('language');
+        $course->small_description = $request->input('small_description');
+        $course->tag = $request->input('tag');
+        $course->location = $request->input('location');
+        $course->nbr_student = $request->input('nbr_student');
+        $course->level = $request->input('level');
+        $course->category_id = $request->input('category_id');
+        $course->active = $request->input('active');
+        $course->description = $request->input('description');
+        $course->teacher_id = Auth::user()->teacher->id;
+        $course->slug = str_slug($request->input('title'), '-');
+
+        $imageName = 'storage/'.time().'.'.request()->image->getClientOriginalExtension();
+        request()->image->move(public_path('images'), $imageName);
+
+        $course->image = $imageName;
+
+        $course->save();
+
+        return back()->with('success', 'Your course is added ');
     }
 
     public function index()
@@ -49,6 +89,10 @@ class TeacherDashboardController extends Controller
             $axsSessions = $this->chartAxY();
             $bestCourses = Course::whereTeacher_id(Auth::user()->teacher->id)->orderBy('id', 'desc')->limit(3)->get();
 
+            $myCourses = Course::whereTeacher_id(Auth::user()->teacher->id)->orderBy('id', 'desc')->get();
+
+            $categories = Category::all();
+
             return view('teacher.dashboard', compact(
                 'totalCourses',
                 'totalMyCourses',
@@ -60,7 +104,9 @@ class TeacherDashboardController extends Controller
                 'totalComments',
                 'axsDate',
                 'axsSessions',
-                'bestCourses'
+                'bestCourses',
+                'myCourses',
+                'categories'
             ));
         }
     }
@@ -124,7 +170,7 @@ class TeacherDashboardController extends Controller
 
     public function chartAxY()
     {
-        $bestCourses = Course::whereTeacher_id(Auth::user()->teacher->id)->orderBy('id', 'desc')->limit(3)->get();
+        $bestCourses = Course::whereTeacher_id(Auth::user()->teacher->id)->orderBy('id', 'asc')->limit(3)->get();
 
         $axsDateNum = $this->arrayYearsMonthNumber_And_arrayYearsMonthCar()[0];
         
