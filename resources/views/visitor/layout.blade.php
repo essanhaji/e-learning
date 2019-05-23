@@ -5,7 +5,7 @@
 <head>
     <!-- Basic Page Needs -->
     <meta charset="utf-8">
-    <title>Educate - Education HTML Templates</title>
+    <title>Educate</title>
 
     <meta name="author" content="themesflat.com">
 

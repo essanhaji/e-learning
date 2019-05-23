@@ -10,6 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+//----------------------------------->>>>>> Home
+///////////////////////////////////////////////////
+Route::get('home', 'HomeController@index')->middleware('auth');
 
 
 
@@ -22,7 +25,7 @@ Route::get('/student', 'HomeController@indexStudent');
 
 //----------------------------------->>>>>> Teacher
 ///////////////////////////////////////////////////
-Route::get('/teacher', 'HomeController@indexTeacher');
+Route::get('/teacher', 'TeacherDashboardController@index');
 
 
 
@@ -46,7 +49,6 @@ Route::get('register', 'HomeControllerAuth@register');
 Auth::routes();
 // consulter les roles
 Route::get('/userhaslogin', 'HomeController@userHasLogin');
-Route::get('home', 'HomeController@index')->middleware('auth');
 
 
 #.... about us

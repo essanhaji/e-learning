@@ -83,4 +83,12 @@ class User extends \TCG\Voyager\Models\User
     public function role(){
         return $this->belongsTo(Role::class);
     }
+
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
+
+    public function commentReplys(){
+        return $this->hasMany(CommentReply::class);
+    }
 }

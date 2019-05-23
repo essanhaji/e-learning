@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use App\User;
 use App\Category;
 use App\TeacherRate;
+use App\Post;
+use App\Comment;
+use App\CommentReply;
 
 class TeacherProfile extends Model
 {
@@ -22,6 +25,11 @@ class TeacherProfile extends Model
         return $this->hasMany(TeacherRate::class);
     }
 
+    public function courses(){
+        return $this->hasMany(Course::class);
+    }
+
+
     // return the rate of the curent object
     public function rate()
     {
@@ -32,4 +40,31 @@ class TeacherProfile extends Model
             return $rates / $this->teacherRates()->count();
         }
     }
+
+
+    public function totalStudent()
+    {
+        $somme = 0;
+        $courses = Course::whereTeacher_id($this->id)->get();
+        
+        foreach ($courses as $course) {
+            $somme = $somme + $course->sessions->count();
+        }
+        return $somme;
+    }
+
+
+    public function totalPosts()
+    {
+        $postsCount = Post::whereUser_id($this->user->id)->count();
+        return $postsCount;
+    }
+
+
+    public function totalComments()
+    {
+        $somme = $this->user->comments->count() + $this->user->commentReplys->count();
+        return $somme;
+    }
+
 }

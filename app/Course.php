@@ -9,6 +9,7 @@ use App\Question;
 use App\CourseFaq;
 use App\Category;
 use App\CourseSession;
+use App\Session;
 use App\Comment;
 use App\TeacherProfile;
 use DateTime;
@@ -30,6 +31,10 @@ class Course extends Model
 
     public function courseSessions(){
         return $this->hasMany(CourseSession::class);
+    }
+
+    public function sessions(){
+        return $this->hasMany(Session::class);
     }
 
     public function comments(){
