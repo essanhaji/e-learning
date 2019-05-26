@@ -176,7 +176,7 @@
                             </div>
                             <div class="text">
 
-                                <a href="{{ url('courses/teachers/'.$teacher->slug) }}" title="{{ $teacher->user->name }}">{{ str_limit($teacher->user->name, 13) }}</a>
+                                <a href="{{ url('courses/teacher/'.$teacher->slug) }}" title="{{ $teacher->user->name }}">{{ str_limit($teacher->user->name, 13) }}</a>
                                 <p>{{ str_limit($teacher->category->name, 15) }}</p>
 
                             </div>
