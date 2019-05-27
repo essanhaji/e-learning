@@ -132,12 +132,12 @@
                         <nav>
                             <ul>
                                 <li><a href="#section-iconbox-1" class="sticon ti-wallet"><span>Courses</span></a></li>
-                                <li><a href="#section-iconbox-2" class="sticon ti-clipboard"><span>Set Permissions</span></a></li>
-                                <li><a href="#section-iconbox-3" class="sticon ti-user"><span>Message Users</span></a></li>
-                                <li><a href="#section-iconbox-4" class="sticon ti-check-box"><span>Save and finish</span></a></li>
+                                <li><a href="#section-iconbox-2" class="sticon ti-clipboard"><span>Posts</span></a></li>
+                                <li><a href="#section-iconbox-3" class="sticon ti-user"><span>Students</span></a></li>
                             </ul>
                         </nav>
                         <div class="content-wrap">
+
                             <section id="section-iconbox-1">
                                 <div class="p-20 row">
                                     <div class="col-sm-6">
@@ -229,72 +229,179 @@
                                 </div>
                                 
                             </section>
+                            
                             <section id="section-iconbox-2">
                                 <div class="p-20 row">
                                     <div class="col-sm-6">
-                                        <h3 class="m-t-0">Set Users Permission</h3>
+                                        <h3 class="m-t-0">My Posts</h3>
                                     </div>
                                     <div class="col-sm-6">
                                         <ul class="side-icon-text pull-right">
-                                            <li><a href="#"><span class="circle circle-sm bg-success di"><i class="ti-plus"></i></span><span>Add Users</span></a></li>
-                                            <li><a href="#"><span class="circle circle-sm bg-danger di"><i class="ti-pencil-alt"></i></span><span>Edit</span></a></li>
+                                            <li><a data-toggle="modal" data-target=".modalAddCourse"><span class="circle circle-sm bg-success di"><i class="ti-plus"></i></span><span>Add Course</span></a></li>
                                         </ul>
+                                        @include('teacher.modalAddCourse')
                                     </div>
                                 </div>
                                 <div class="table-responsive manage-table">
-                                    <h1>table of posts</h1>
-                                </div>
-                                <div class="p-10 row">
-                                    <div class="col-sm-8">
-                                        <h3>1 members selected</h3>
+
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-12 col-sm-12">
+                                        <div class="panel">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover manage-u-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="width: 70px;" class="text-center">#</th>
+                                                            <th>TITLE/SLUG</th>
+                                                            <th>STATUS</th>
+                                                            <th>KEYWORDS</th>
+                                                            <th>IMAGE</th>
+                                                            <th>CATEGORY</th>
+                                                            <th>DATE</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach($myPosts as $myPost)
+                                                        <tr>
+                                                            <td class="text-center">{{ $myPost->id }}</td>
+
+                                                            <td>
+                                                                <span class="font-medium">{{ $myPost->title }}</span>
+                                                                <br><span class="text-muted">{{ $myPost->slug }}</span>
+                                                            </td>
+
+                                                            <td>
+                                                                {{ $myPost->status }}
+                                                            </td>
+
+                                                            <td>
+                                                                {{ $myPost->meta_keywords }}
+                                                            </td>
+
+                                                            <td>
+                                                                <img src="{{ asset('storage/'.$myPost->image ) }}" alt="{{ $myPost->title }}" width="70px">
+                                                            </td>
+
+                                                            <td>
+                                                                {{ $myPost->category->name }}
+                                                            </td>
+
+                                                            <td>
+                                                                {{ $myPost->created_at }}
+                                                            </td>
+
+                                                            <td>
+                                                                <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5">
+                                                                    <i class="icon-trash"></i>
+                                                                </button>
+                                                                <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5">
+                                                                    <i class="ti-plus"></i>
+                                                                </button>
+                                                                <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5">
+                                                                    <i class="ti-pencil-alt"></i>
+                                                                </button>
+                                                                
+                                                            </td>
+                                                        </tr>
+                                                        @endforeach
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-sm-2 pull-right m-t-10"><a href="javascript:void(0);" class="btn btn-block p-10 btn-rounded btn-danger"><span>Next</span><i class="ti-arrow-right m-l-5"></i></a></div>
                                 </div>
+                                
+                                </div>
+                                
                             </section>
+
                             <section id="section-iconbox-3">
                                 <div class="p-20 row">
                                     <div class="col-sm-6">
-                                        <h3 class="m-t-0">Manage Users</h3>
+                                        <h3 class="m-t-0">My Posts</h3>
                                     </div>
                                     <div class="col-sm-6">
                                         <ul class="side-icon-text pull-right">
-                                            <li><a href="#"><span class="circle circle-sm bg-success di"><i class="ti-plus"></i></span><span>Add Users</span></a></li>
-                                            <li><a href="#"><span class="circle circle-sm bg-danger di"><i class="ti-pencil-alt"></i></span><span>Edit</span></a></li>
+                                            <li><a data-toggle="modal" data-target=".modalAddCourse"><span class="circle circle-sm bg-success di"><i class="ti-plus"></i></span><span>Add Course</span></a></li>
                                         </ul>
+                                        @include('teacher.modalAddCourse')
                                     </div>
                                 </div>
                                 <div class="table-responsive manage-table">
-                                    <h1>table of oure student</h1>
-                                </div>
-                                <div class="p-10 row">
-                                    <div class="col-sm-8">
-                                        <h3>1 members selected</h3>
+
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-12 col-sm-12">
+                                        <div class="panel">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover manage-u-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="width: 70px;" class="text-center">#</th>
+                                                            <th>TITLE/SLUG</th>
+                                                            <th>STATUS</th>
+                                                            <th>KEYWORDS</th>
+                                                            <th>IMAGE</th>
+                                                            <th>CATEGORY</th>
+                                                            <th>DATE</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach($myPosts as $myPost)
+                                                        <tr>
+                                                            <td class="text-center">{{ $myPost->id }}</td>
+
+                                                            <td>
+                                                                <span class="font-medium">{{ $myPost->title }}</span>
+                                                                <br><span class="text-muted">{{ $myPost->slug }}</span>
+                                                            </td>
+
+                                                            <td>
+                                                                {{ $myPost->status }}
+                                                            </td>
+
+                                                            <td>
+                                                                {{ $myPost->meta_keywords }}
+                                                            </td>
+
+                                                            <td>
+                                                                <img src="{{ asset('storage/'.$myPost->image ) }}" alt="{{ $myPost->title }}" width="70px">
+                                                            </td>
+
+                                                            <td>
+                                                                {{ $myPost->category->name }}
+                                                            </td>
+
+                                                            <td>
+                                                                {{ $myPost->created_at }}
+                                                            </td>
+
+                                                            <td>
+                                                                <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5">
+                                                                    <i class="icon-trash"></i>
+                                                                </button>
+                                                                <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5">
+                                                                    <i class="ti-plus"></i>
+                                                                </button>
+                                                                <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5">
+                                                                    <i class="ti-pencil-alt"></i>
+                                                                </button>
+                                                                
+                                                            </td>
+                                                        </tr>
+                                                        @endforeach
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-sm-2 pull-right m-t-10"><a href="javascript:void(0);" class="btn btn-block p-10 btn-rounded btn-danger"><span>Next</span><i class="ti-arrow-right m-l-5"></i></a></div>
                                 </div>
+                                
+                                </div>
+                                
                             </section>
-                            <section id="section-iconbox-4">
-                                <div class="p-20 row">
-                                    <div class="col-sm-6">
-                                        <h3 class="m-t-0">Save and finish</h3>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <ul class="side-icon-text pull-right">
-                                            <li><a href="#"><span class="circle circle-sm bg-success di"><i class="ti-plus"></i></span><span>Add Users</span></a></li>
-                                            <li><a href="#"><span class="circle circle-sm bg-danger di"><i class="ti-pencil-alt"></i></span><span>Edit</span></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="table-responsive manage-table">
-                                    <h1>table of sommething</h1>
-                                </div>
-                                <div class="p-10 row">
-                                    <div class="col-sm-8">
-                                        <h3>1 members selected</h3>
-                                    </div>
-                                    <div class="col-sm-2 pull-right m-t-10"><a href="javascript:void(0);" class="btn btn-block p-10 btn-rounded btn-danger"><span>Save</span><i class="ti-arrow-right m-l-5"></i></a></div>
-                                </div>
-                            </section>
+                            
                         </div>
                         <!-- /content -->
                     </div>
