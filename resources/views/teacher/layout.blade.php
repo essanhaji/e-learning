@@ -63,7 +63,7 @@
             <div class="navbar-header">
                 <div class="top-left-part">
                     <!-- Logo -->
-                    <a class="logo" href="index.html">
+                    <a class="logo" href="/">
                         <!-- Logo icon image, you can use font-icon also --><b>
                             <!--This is dark logo icon--><img src="{{ asset('teacherStyles/plugins/images/admin-logo.png') }}" alt="home" class="dark-logo" />
                             <!--This is light logo icon--><img src="{{ asset('teacherStyles/plugins/images/admin-logo-dark.png') }}" alt="home" class="light-logo" />
@@ -96,7 +96,14 @@
                             <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
                             <li role="separator" class="divider"></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
+                            <li>
+                                <a href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i> <span class="hide-menu">Log out</span></a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </li>
                         </ul>
                         <!-- /.dropdown-user -->
                     </li>
@@ -125,23 +132,32 @@
                             <li><a href="javascript:void(0)"><i class="fa fa-power-off"></i> <span class="hide-menu">Logout</span></a></li>
                         </ul>
                     </li>
+
                     <li>
-                        <a href="index.html" class="waves-effect"><i class="mdi mdi-av-timer fa-fw" data-icon="v"></i> <span class="hide-menu"> Dashboard </span></a>
+                        <a href="/teacher"><i class="mdi mdi-av-timer fa-fw"></i> <span class="hide-menu"> Dashboard </span></a>
                     </li>
                     
                     <li>
-                        <a href="#" class="waves-effect"><i class="mdi mdi-content-copy fa-fw"></i> <span class="hide-menu">Courses</span></a>
+                        <a href="/teacher#section-iconbox-1"><i class="sticon ti-wallet"></i> <span class="hide-menu">Courses</span></a>
                     </li>
 
                     <li>
-                        <a href="#" class="waves-effect"><i class="mdi mdi-content-copy fa-fw"></i> <span class="hide-menu">Courses</span></a>
+                        <a href="/teacher#section-iconbox-2"><i class="sticon ti-clipboard"></i> <span class="hide-menu">Posts</span></a>
                     </li>
 
+                    <li>
+                        <a href="/teacher#section-iconbox-3"><i class="sticon ti-user"></i> <span class="hide-menu">Students</span></a>
+                    </li>
                     
                     <li class="devider"></li>
 
                     <li>
-                        <a href="login.html" class="waves-effect"><i class="mdi mdi-logout fa-fw"></i> <span class="hide-menu">Log out</span></a>
+                        <a href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();"><i class="mdi mdi-logout fa-fw"></i> <span class="hide-menu">Log out</span></a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
                     </li>
 
                     <li class="devider"></li>

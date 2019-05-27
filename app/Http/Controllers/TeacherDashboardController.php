@@ -91,6 +91,8 @@ class TeacherDashboardController extends Controller
 
             $myCourses = Course::whereTeacher_id(Auth::user()->teacher->id)->orderBy('id', 'desc')->get();
 
+            $myPosts = Post::whereUser_id(Auth::user()->id)->orderBy('created_at', 'desc')->get();
+
             $categories = Category::all();
 
             return view('teacher.dashboard', compact(
@@ -106,7 +108,8 @@ class TeacherDashboardController extends Controller
                 'axsSessions',
                 'bestCourses',
                 'myCourses',
-                'categories'
+                'categories',
+                'myPosts'
             ));
         }
     }
